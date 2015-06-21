@@ -104,6 +104,7 @@ if (string_length(text) &gt; 0) {
           <argument>
             <kind>1</kind>
             <string>draw_set_colour(c_red)
+draw_set_font(f_drabcde)
 draw_text(x,y, "Time: " + draw_minutes + "m : " + draw_seconds + "s") // Draw time with a colon as a separator
 
 if (string_length(text) &gt; 0) {

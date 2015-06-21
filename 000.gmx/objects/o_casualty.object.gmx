@@ -65,7 +65,7 @@ ds_list_add(actions, danger);
           <argument>
             <kind>1</kind>
             <string>draw_self()
-draw_set_font(-1)
+draw_set_font(f_drabcde)
 draw_set_colour(c_red)
 draw_text(x - sprite_width, y - sprite_height, name)
 
