@@ -12,6 +12,14 @@
     <sprite>sprites\spr_empty</sprite>
     <sprites name="MENU">
       <sprite>sprites\spr_b_danger</sprite>
+      <sprite>sprites\spr_b_elec</sprite>
+      <sprite>sprites\spr_b_c</sprite>
+    </sprites>
+    <sprites name="WARN">
+      <sprite>sprites\spr_w_psych</sprite>
+      <sprite>sprites\spr_w_elec</sprite>
+      <sprite>sprites\spr_w_env</sprite>
+      <sprite>sprites\spr_w_phys</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background"/>
@@ -23,6 +31,7 @@
     <script>scripts\s_create_casualty.gml</script>
     <script>scripts\s_add_danger.gml</script>
     <script>scripts\s_add_rand_danger.gml</script>
+    <script>scripts\s_find_sprite.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_drabcde</font>
@@ -44,6 +53,8 @@
       <object>objects\o_b_danger</object>
       <object>objects\o_button</object>
       <object>objects\o_drabcde</object>
+      <object>objects\o_b_c</object>
+      <object>objects\o_b_elec</object>
     </objects>
     <objects name="DANGER">
       <object>objects\o_danger</object>

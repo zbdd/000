@@ -29,6 +29,10 @@
 text = 'is default text'
 debug = false;
 danger = noone
+selected = false
+
+// known problems
+problems = ds_list_create()
 
 // drabcde steps
 actions = ds_list_create() // holds the actions
@@ -60,12 +64,17 @@ ds_list_add(actions, danger);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>//if (debug) {
-    draw_self()
-    draw_set_font(-1)
-    draw_set_colour(c_red)
-    draw_text(x - sprite_width, y - sprite_height, name)
-//}
+            <string>draw_self()
+draw_set_font(-1)
+draw_set_colour(c_red)
+draw_text(x - sprite_width, y - sprite_height, name)
+
+if (selected) {
+    for (idx = 0; idx &lt; ds_list_size(problems); idx++) {
+        problem_to_draw = "spr_w_" + string(problems[| idx])
+        draw_sprite(s_find_sprite(problems[| idx]), 0, x + (10 * idx), y - 50)
+    }
+}
 </string>
           </argument>
         </arguments>

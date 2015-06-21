@@ -7,11 +7,21 @@ else player = instance_find(o_player, instance_number(o_player))
 
 for (idx = 0; idx < TEST_CASUALTIES; idx++) {
     show_debug_message(idx)
-    var casualty = s_create_casualty(max(irandom(view_wview[0] - 20), 20), 
-                        max(irandom(view_hview[0] - 20), 20),
+    
+    too_close = false
+    var casualty = s_create_casualty(max(300, irandom(500)), 
+                        max(150, irandom(400)),
                         'casualty' + string(idx + 1),
                         'default description')
-    ds_list_add(control.objects, casualty);
+    for(i = 0; i < ds_list_size(control.objects); i++) {
+        if (distance_to_object(control.objects[| i]) < 60)
+            too_close = true
+    }
+    if (!too_close) {
+        ds_list_add(control.objects, casualty);
+    } else {
+        idx--
+    }
 }
 
 /*var vehicle_1 = instance_create(x, y, o_vehicle);
