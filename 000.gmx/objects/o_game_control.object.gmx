@@ -35,7 +35,7 @@ danger_check = instance_number(o_casualty) + 1 // check for danger
 danger_done = 0
 hud = instance_create(x, y, o_hud);
 calling = false
-TIMER_MAX = 60 * room_speed;
+TIMER_MAX = 3 * room_speed;
 timer = TIMER_MAX
 </string>
           </argument>
@@ -88,8 +88,8 @@ timer = TIMER_MAX
 } else {
     timer = TIMER_MAX
 }
+
 if (timer &lt; 0) {
-    alarm[0] = 1
     calling = false
 }
 </string>

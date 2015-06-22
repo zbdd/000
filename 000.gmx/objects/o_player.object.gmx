@@ -25,7 +25,10 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>move_speed = 2
+            <string>image_speed = 0
+image_index = 0
+
+move_speed = 2
 state = 'thinking'
 next_state = 'idle'
 actions = ds_list_create()
@@ -34,6 +37,7 @@ hud = instance_create(x, y, o_hud)
 menu = ds_list_create()
 problems = ds_list_create()
 selected = false
+casualty = noone
 
 // defaults
 danger = s_add_danger('', '')
@@ -62,6 +66,16 @@ ds_list_add(actions, danger);
             <kind>1</kind>
             <string>/// THINKING
 speed = 0
+
+// garbage collection
+if (next_state != 'menu') {
+    for(idx = 0; idx &lt; ds_list_size(menu); idx++) {
+        with (menu[| idx]) { instance_destroy(); }
+    }
+    if (casualty != noone) casualty.selected = false
+    ds_list_clear(menu)
+}
+    
 state = next_state
 </string>
           </argument>
@@ -84,8 +98,9 @@ state = next_state
           <argument>
             <kind>1</kind>
             <string>/// IDLE
+image_index = 0
 
-if (state == 'idle') {
+if (state == 'idle' &amp;&amp; speed == 0) {   
     // Mouse directed movement
     if (mouse_check_button(mb_left)) move_towards_point(mouse_x, mouse_y, move_speed)
     else speed = 0
@@ -138,11 +153,6 @@ if (state == 'idle') {
 if (state == 'menu') {
     // Destroy menu
     if (mouse_check_button_pressed(mb_right)) {
-        for(idx = 0; idx &lt; ds_list_size(menu); idx++) {
-            with (menu[| idx]) { instance_destroy(); }
-        }
-        casualty.selected = false
-        ds_list_clear(menu)
         next_state = 'idle'
     }
     // Main casualty menu
@@ -161,27 +171,32 @@ if (state == 'menu') {
                     }
                 break
                 
-                case 'call_elec':
+                case 'elec':
                     if(!global.control.calling) {
                         ds_list_add(o_player.log, 'call elec')
-                        if (ds_list_find_index(actions, 'elec')) global.control.score -= 100
-                        else ds_list_add(actions, 'elec')
+                        if (ds_list_find_index(actions, button.type)) global.control.score -= 100
+                        else ds_list_add(actions, button.type)
                         next_state = 'call'
                     }
                 break;
                 
-                case 'call_police':
+                case 'police':
                     if(!global.control.calling) {
                         ds_list_add(o_player.log, 'call police')
-                        if (ds_list_find_index(actions, 'police')) global.control.score -= 100
-                        else ds_list_add(actions, 'police')
+                        if (ds_list_find_index(actions, button.type)) global.control.score -= 100
+                        else ds_list_add(actions, button.type)
                         next_state = 'call'
                     }
                 break;
             }
         }
     }
+    
+    // prep next state
+    if (next_state == 'call')
+        if (!global.control.calling) global.control.calling = true
 }
+
 </string>
           </argument>
         </arguments>
@@ -205,15 +220,15 @@ if (state == 'menu') {
             <string>/// CALL
 
 if (state == 'call') {
-    global.control.calling = true
-    speed = 0
+    image_index = 1
     
     if (mouse_check_button_pressed(mb_right)) {
         global.control.calling = false;
-        next_state = 'menu'
+        next_state = 'idle'
+    } else if (!global.control.calling) {
+        s_create_service(actions[| (ds_list_size(actions) - 1)])
+        next_state = 'idle'
     }
-    
-    if (!global.control.calling) next_state = 'menu'
 }
 </string>
           </argument>

@@ -39,6 +39,7 @@
     <script>scripts\s_add_danger.gml</script>
     <script>scripts\s_add_rand_danger.gml</script>
     <script>scripts\s_find_sprite.gml</script>
+    <script>scripts\s_create_service.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_drabcde</font>
@@ -52,6 +53,7 @@
     </objects>
     <objects name="NPC">
       <object>objects\o_casualty</object>
+      <object>objects\o_service</object>
     </objects>
     <objects name="WORLD">
       <object>objects\o_vehicle</object>
