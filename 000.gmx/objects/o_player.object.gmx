@@ -29,6 +29,7 @@
 state = 'thinking'
 next_state = 'idle'
 actions = ds_list_create()
+log = ds_list_create()
 hud = instance_create(x, y, o_hud)
 menu = ds_list_create()
 problems = ds_list_create()
@@ -96,11 +97,14 @@ if (state == 'idle') {
             
             if (casualty == noone) {
                 casualty = instance_position(mouse_x, mouse_y, o_player)
+            } else {
+                menu = s_create_menu(mouse_x, mouse_y)
+                casualty.selected = true
+                next_state = 'menu'
             }
             
-            if (casualty != noone) {
-                show_debug_message("selected casualty")
-                menu = s_create_menu(mouse_x, mouse_y)
+            if (casualty != noone &amp;&amp; !casualty.selected) {
+                menu = s_create_player_menu(mouse_x, mouse_y)
                 casualty.selected = true
                 next_state = 'menu'
             }      
@@ -146,21 +150,70 @@ if (state == 'menu') {
         button = instance_position(mouse_x, mouse_y, o_button)
         
         if (button != noone) {
-            show_debug_message("found " + string(button.type) + " with payload of " + string(casualty.actions[| 0].text))
             switch (button.type) {
                 case 'danger':
-                    show_message(casualty.actions[| 0].text)
+                    ds_list_add(o_player.log, 'danger')
                     problem = ds_list_find_index(casualty.problems, casualty.actions[| 0].type)
-                    show_debug_message(problem)
+
                     if (problem == -1) {
                         ds_list_add(casualty.problems, casualty.actions[| 0].type)
                         global.control.danger_done++
-                        show_debug_message(casualty.actions[| 0].type)    
                     }
                 break
+                
+                case 'call_elec':
+                    if(!global.control.calling) {
+                        ds_list_add(o_player.log, 'call elec')
+                        if (ds_list_find_index(actions, 'elec')) global.control.score -= 100
+                        else ds_list_add(actions, 'elec')
+                        next_state = 'call'
+                    }
+                break;
+                
+                case 'call_police':
+                    if(!global.control.calling) {
+                        ds_list_add(o_player.log, 'call police')
+                        if (ds_list_find_index(actions, 'police')) global.control.score -= 100
+                        else ds_list_add(actions, 'police')
+                        next_state = 'call'
+                    }
+                break;
             }
         }
     }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// CALL
+
+if (state == 'call') {
+    global.control.calling = true
+    speed = 0
+    
+    if (mouse_check_button_pressed(mb_right)) {
+        global.control.calling = false;
+        next_state = 'menu'
+    }
+    
+    if (!global.control.calling) next_state = 'menu'
 }
 </string>
           </argument>

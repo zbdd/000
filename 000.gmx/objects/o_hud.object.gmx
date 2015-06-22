@@ -103,9 +103,12 @@ if (string_length(text) &gt; 0) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>draw_set_colour(c_red)
+            <string>/// Draw GUI
+draw_set_colour(c_red)
 draw_set_font(f_drabcde)
 draw_text(x, y, "Time: " + draw_minutes + "m : " + draw_seconds + "s") // Draw time with a colon as a separator
+
+// Main task ahead progress update
 if (global.control.danger_check &gt; 0) {
     draw_text(x + 160, y, 'DANGER PRESENT')
     for (idx = 0; idx &lt; global.control.danger_check; idx++) {
@@ -114,6 +117,25 @@ if (global.control.danger_check &gt; 0) {
     for (idx = 0; idx &lt; global.control.danger_done; idx++) {
         draw_sprite(spr_tick, 0, x + 175 + (40 * idx), y + 40)
     }
+}
+
+// if calling services, show progress
+if (global.control.calling) {
+    draw_set_colour(c_black)
+    draw_rectangle(x + 320, y, x + 420, y + 30, false)
+    draw_set_colour(c_red)
+    draw_rectangle(x + 320, y, x + 320 + ((global.control.timer/global.control.TIMER_MAX) * 100), y + 30, false)
+    draw_set_colour(c_black)
+    draw_set_font(f_drabcde_small)
+    draw_text(x + 320, y + 7, 'Calling services')
+}
+
+// debug purposes, show what the user has done
+for (idx = 0; idx &lt; ds_list_size(o_player.log); idx++) {
+    draw_set_colour(c_red)
+    draw_set_font(f_drabcde_small)
+    draw_text(x, y + 60, 'Action log:')
+    draw_text(x, y + 80 + (20 * idx), o_player.log[| idx])
 }
 </string>
           </argument>

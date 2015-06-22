@@ -13,6 +13,7 @@
       <sprite>sprites\spr_b_danger</sprite>
       <sprite>sprites\spr_b_elec</sprite>
       <sprite>sprites\spr_b_c</sprite>
+      <sprite>sprites\spr_b_police</sprite>
     </sprites>
     <sprites name="WARN">
       <sprite>sprites\spr_w_psych</sprite>
@@ -25,12 +26,14 @@
     </sprites>
     <sprite>sprites\spr_tick</sprite>
     <sprite>sprites\spr_box</sprite>
+    <sprite>sprites\spr_police</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\s_mission_test.gml</script>
     <script>scripts\s_create_menu.gml</script>
+    <script>scripts\s_create_player_menu.gml</script>
     <script>scripts\s_string_extract.gml</script>
     <script>scripts\s_create_casualty.gml</script>
     <script>scripts\s_add_danger.gml</script>
@@ -39,6 +42,7 @@
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_drabcde</font>
+    <font>fonts\f_drabcde_small</font>
   </fonts>
   <objects name="objects">
     <object>objects\o_game_control</object>
@@ -59,6 +63,7 @@
       <object>objects\o_drabcde</object>
       <object>objects\o_b_c</object>
       <object>objects\o_b_elec</object>
+      <object>objects\o_b_police</object>
     </objects>
     <objects name="DANGER">
       <object>objects\o_danger</object>

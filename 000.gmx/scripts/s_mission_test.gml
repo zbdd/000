@@ -1,7 +1,7 @@
 control = argument0;
 TEST_CASUALTIES = 3
 
-var player = instance_create(x, y, o_player)
+var player = instance_create(x + 200, y + 200, o_player)
 if (!instance_exists(control.objects)) ds_list_add(control.objects, player)
 else player = instance_find(o_player, instance_number(o_player))
 
