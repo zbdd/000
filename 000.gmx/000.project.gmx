@@ -7,7 +7,6 @@
   <sounds name="sound"/>
   <sprites name="sprites">
     <sprite>sprites\spr_player</sprite>
-    <sprite>sprites\spr_casualty</sprite>
     <sprite>sprites\spr_vehicle</sprite>
     <sprite>sprites\spr_empty</sprite>
     <sprites name="MENU">
@@ -21,6 +20,11 @@
       <sprite>sprites\spr_w_env</sprite>
       <sprite>sprites\spr_w_phys</sprite>
     </sprites>
+    <sprites name="CASUALTY">
+      <sprite>sprites\spr_casualty</sprite>
+    </sprites>
+    <sprite>sprites\spr_tick</sprite>
+    <sprite>sprites\spr_box</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>

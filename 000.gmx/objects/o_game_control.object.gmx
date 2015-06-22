@@ -30,8 +30,11 @@ debug = true;
 score = 0;
 level = 0;
 objects = ds_list_create();
-hud = instance_create(x, y, o_hud);
 mission = s_mission_test(self);
+danger_check = instance_number(o_casualty) + 1 // check for danger
+danger_done = 0
+hud = instance_create(x, y, o_hud);
+
 </string>
           </argument>
         </arguments>

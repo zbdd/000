@@ -31,6 +31,9 @@ debug = false;
 danger = noone
 selected = false
 
+image_speed = 0
+image_index = irandom(4)
+
 // known problems
 problems = ds_list_create()
 

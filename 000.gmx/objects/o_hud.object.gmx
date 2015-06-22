@@ -105,19 +105,15 @@ if (string_length(text) &gt; 0) {
             <kind>1</kind>
             <string>draw_set_colour(c_red)
 draw_set_font(f_drabcde)
-draw_text(x,y, "Time: " + draw_minutes + "m : " + draw_seconds + "s") // Draw time with a colon as a separator
-
-if (string_length(text) &gt; 0) {
-    draw_set_colour(c_black)
-    draw_rectangle(x, y, x + 100, y + 100, false)
-    draw_set_colour(c_red)
-    draw_text(x, y + 50, text)
-    button = instance_position(mouse_x, mouse_y, o_button)
-
-    if (button != noone) {
-        draw_set_colour(c_blue)
-        var hover = draw_rectangle(button.x, button.y, button.x + (string_length(button.text) * 10), button.y + 15, true)
-    } 
+draw_text(x, y, "Time: " + draw_minutes + "m : " + draw_seconds + "s") // Draw time with a colon as a separator
+if (global.control.danger_check &gt; 0) {
+    draw_text(x + 160, y, 'DANGER PRESENT')
+    for (idx = 0; idx &lt; global.control.danger_check; idx++) {
+        draw_sprite(spr_box, 0, x + 175 + (40 * idx), y + 40)
+    }
+    for (idx = 0; idx &lt; global.control.danger_done; idx++) {
+        draw_sprite(spr_tick, 0, x + 175 + (40 * idx), y + 40)
+    }
 }
 </string>
           </argument>

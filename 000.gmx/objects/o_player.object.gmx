@@ -154,6 +154,7 @@ if (state == 'menu') {
                     show_debug_message(problem)
                     if (problem == -1) {
                         ds_list_add(casualty.problems, casualty.actions[| 0].type)
+                        global.control.danger_done++
                         show_debug_message(casualty.actions[| 0].type)    
                     }
                 break
