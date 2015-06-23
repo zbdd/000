@@ -15,21 +15,21 @@ for (idx = 0; idx < instance_number(o_casualty); idx++) {
             
             switch (type) {
                 case 'elec':
-                    instance_create(casualty.x - 16, casualty.y, o_service)
+                    man = instance_create(casualty.x - 16, casualty.y, o_service)
+                    man.sprite_index = spr_elec
                 break;
                 
                 case 'env':
-                    instance_create(casualty.x - 16, casualty.y, o_service)
+                    man = instance_create(casualty.x - 16, casualty.y, o_service)
                 break;
                     
                 case 'police':
-                    instance_create(casualty.x - 16, casualty.y, o_service)
+                    man = instance_create(casualty.x - 16, casualty.y, o_service)
                 break;
             }
         }
     }
 }
-
 
 
 
