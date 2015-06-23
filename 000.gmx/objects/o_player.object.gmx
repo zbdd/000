@@ -164,9 +164,9 @@ if (state == 'menu') {
                 case 'danger':
                     if (ds_list_size(casualty.actions) &gt; 0) {
                         problem = ds_list_find_index(casualty.problems, casualty.actions[| 0].type)
-    
+                        
                         if (problem == -1) {
-                            ds_list_add(o_player.log, 'danger')
+                            ds_list_add(o_player.log, 'danger checked')
                             ds_list_add(casualty.problems, casualty.actions[| 0].type)
                             global.control.danger_done++
                         }
@@ -176,7 +176,7 @@ if (state == 'menu') {
                 case 'elec':
                     if(!global.control.calling) {
                         ds_list_add(o_player.log, 'call elec')
-                        if (ds_list_find_index(actions, button.type)) global.control.score -= 100
+                        if (ds_list_find_index(actions, button.type)) ds_list_add(o_player.log, 'extra call')
                         ds_list_add(actions, button.type)
                         next_state = 'call'
                     }
@@ -185,7 +185,7 @@ if (state == 'menu') {
                 case 'police':
                     if(!global.control.calling) {
                         ds_list_add(o_player.log, 'call police')
-                        if (ds_list_find_index(actions, button.type)) global.control.score -= 100
+                        if (ds_list_find_index(actions, button.type)) ds_list_add(o_player.log, 'extra call')
                         ds_list_add(actions, button.type)
                         next_state = 'call'
                     }
