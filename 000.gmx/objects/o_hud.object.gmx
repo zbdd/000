@@ -109,14 +109,29 @@ draw_set_font(f_drabcde)
 draw_text(x, y, "Time: " + draw_minutes + "m : " + draw_seconds + "s") // Draw time with a colon as a separator
 
 // Main task ahead progress update
-if (global.control.danger_check &gt; 0) {
-    draw_text(x + 160, y, 'DANGER PRESENT')
-    for (idx = 0; idx &lt; global.control.danger_check; idx++) {
-        draw_sprite(spr_box, 0, x + 175 + (40 * idx), y + 40)
+if (global.control.state == 'danger') {
+    if (global.control.danger_check &gt; 0) {
+        draw_text(x + 160, y, 'DANGER')
+        
+        for (idx = 0; idx &lt; global.control.danger_check; idx++) {
+            draw_sprite(spr_box, 0, x + 175 + (40 * idx), y + 40)
+        }
+        
+        for (idx = 0; idx &lt; global.control.danger_done; idx++) {
+            draw_sprite(spr_spotted, 0, x + 175 + (40 * idx), y + 40)
+        }
+        
+        count = 0
+        for (idx = 0; idx &lt; ds_list_size(o_player.log); idx++) {
+            if (o_player.log[| idx] == 'service arrived') count++
+            
+            if (count &gt; 0) draw_sprite(spr_tick, 0, x + 175 + (40 * count), y + 40)
+            if (count == global.control.danger_done) global.control.state = 'response'
+        }
     }
-    for (idx = 0; idx &lt; global.control.danger_done; idx++) {
-        draw_sprite(spr_tick, 0, x + 175 + (40 * idx), y + 40)
-    }
+}
+if (global.control.state == 'response') {
+    draw_text(x + 160, y, 'RESPONSE')
 }
 
 // if calling services, show progress

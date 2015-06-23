@@ -151,6 +151,8 @@ if (state == 'idle' &amp;&amp; speed == 0) {
             <string>/// MENU
 
 if (state == 'menu') {
+    call = false
+    
     // Destroy menu
     if (mouse_check_button_pressed(mb_right)) {
         next_state = 'idle'
@@ -172,24 +174,29 @@ if (state == 'menu') {
                         }
                     }
                 break
-                
-                case 'elec':
-                    if(!global.control.calling) {
+            }
+            if(!global.control.calling) {
+                switch(button.type) {
+                    case 'elec':
                         ds_list_add(o_player.log, 'call elec')
-                        if (ds_list_find_index(actions, button.type)) ds_list_add(o_player.log, 'extra call')
-                        ds_list_add(actions, button.type)
-                        next_state = 'call'
-                    }
-                break;
-                
-                case 'police':
-                    if(!global.control.calling) {
+                        call = true
+                    break;
+                    
+                    case 'police':
                         ds_list_add(o_player.log, 'call police')
-                        if (ds_list_find_index(actions, button.type)) ds_list_add(o_player.log, 'extra call')
-                        ds_list_add(actions, button.type)
-                        next_state = 'call'
-                    }
-                break;
+                        call = true
+                    break;
+                    
+                    case 'env':
+                        ds_list_add(o_player.log, 'call ses')
+                        call = true
+                    break;
+                }
+                if(call) {
+                    if (ds_list_find_index(actions, button.type)) ds_list_add(o_player.log, 'extra call')
+                    ds_list_add(actions, button.type)
+                    next_state = 'call'
+                }
             }
         }
     }

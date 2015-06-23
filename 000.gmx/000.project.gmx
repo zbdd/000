@@ -14,6 +14,7 @@
       <sprite>sprites\spr_b_elec</sprite>
       <sprite>sprites\spr_b_c</sprite>
       <sprite>sprites\spr_b_police</sprite>
+      <sprite>sprites\spr_b_ses</sprite>
     </sprites>
     <sprites name="WARN">
       <sprite>sprites\spr_w_psych</sprite>
@@ -29,7 +30,9 @@
     <sprites name="SERVICE">
       <sprite>sprites\spr_police</sprite>
       <sprite>sprites\spr_elec</sprite>
+      <sprite>sprites\spr_ses</sprite>
     </sprites>
+    <sprite>sprites\spr_spotted</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -68,6 +71,7 @@
       <object>objects\o_drabcde</object>
       <object>objects\o_b_c</object>
       <object>objects\o_b_elec</object>
+      <object>objects\o_b_ses</object>
       <object>objects\o_b_police</object>
     </objects>
     <objects name="DANGER">

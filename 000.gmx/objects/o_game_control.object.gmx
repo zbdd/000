@@ -37,6 +37,7 @@ hud = instance_create(x, y, o_hud);
 calling = false
 TIMER_MAX = 3 * room_speed;
 timer = TIMER_MAX
+state = 'danger'
 </string>
           </argument>
         </arguments>

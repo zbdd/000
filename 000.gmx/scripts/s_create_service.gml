@@ -25,6 +25,7 @@ for (idx = 0; idx < instance_number(o_casualty); idx++) {
                 
                 case 'env':
                     man = instance_create(casualty.x - 16, casualty.y, o_service)
+                    man.sprite_index = spr_ses
                 break;
                     
                 case 'police':
@@ -34,6 +35,5 @@ for (idx = 0; idx < instance_number(o_casualty); idx++) {
         }
     }
 }
-
 
 
