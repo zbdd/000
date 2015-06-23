@@ -137,6 +137,11 @@ for (idx = 0; idx &lt; ds_list_size(o_player.log); idx++) {
     draw_text(x, y + 60, 'Action log:')
     draw_text(x, y + 80 + (20 * idx), o_player.log[| idx])
 }
+
+// score - testing purposes and balancing
+draw_set_colour(c_red)
+draw_set_font(f_drabcde)
+draw_text(view_wview[0] - 100, y, 'Score: ' + string(global.control.score))
 </string>
           </argument>
         </arguments>
