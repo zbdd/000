@@ -29,11 +29,19 @@ for (idx = 0; idx < instance_number(o_casualty); idx++) {
                 break;
                     
                 case 'police':
-                    if (instance_number(o_vehicle) == 0) instance_create(128, 256, o_vehicle)
-                    man = instance_create(casualty.x - 16, casualty.y, o_service)
+                    if (instance_number(o_vehicle) == 0) {
+                        // not creating if we don't have a place for it
+                        if (!instance_exists(o_carpark)) break;
+                        else instance_create(
+                            max(o_carpark.x, irandom(x + o_carpark.sprite_width)),
+                            max(o_carpark.y, irandom(y + o_carpark.sprite_height)),
+                            o_vehicle)
+                    }
+                    man = instance_create(o_vehicle.x + 6, o_vehicle.y, o_service)
+                    man.go_to = casualty;
+                    man.vehicle = o_vehicle
                 break;
             }
         }
     }
 }
-

@@ -34,11 +34,15 @@
       <sprite>sprites\spr_police_wagon</sprite>
     </sprites>
     <sprite>sprites\spr_spotted</sprite>
+    <sprite>sprites\spr_service_start</sprite>
+    <sprite>sprites\spr_casualty_start</sprite>
+    <sprite>sprites\spr_carpark</sprite>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\s_mission_test.gml</script>
+    <script>scripts\s_mission_level_one.gml</script>
     <script>scripts\s_create_menu.gml</script>
     <script>scripts\s_create_player_menu.gml</script>
     <script>scripts\s_string_extract.gml</script>
@@ -47,6 +51,7 @@
     <script>scripts\s_add_rand_danger.gml</script>
     <script>scripts\s_find_sprite.gml</script>
     <script>scripts\s_create_service.gml</script>
+    <script>scripts\s_police_done.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_drabcde</font>
@@ -76,8 +81,14 @@
     <objects name="DANGER">
       <object>objects\o_danger</object>
     </objects>
+    <objects name="LEVEL SETUP">
+      <object>objects\o_service_start</object>
+      <object>objects\o_casualty_start</object>
+      <object>objects\o_carpark</object>
+    </objects>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_level_one</room>
     <room>rooms\rm_test</room>
   </rooms>
   <help>
