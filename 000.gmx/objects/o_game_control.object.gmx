@@ -94,6 +94,19 @@ timer = TIMER_MAX
 if (timer &lt; 0) {
     calling = false
 }
+
+var dangers_left = 0
+for (var idx = 0; idx &lt; instance_number(o_casualty); idx++) {
+    var casualty = instance_find(o_casualty, idx)
+    
+    for (var idy = 0; idy &lt; ds_list_size(casualty.actions); idy++) {
+        dangers_left++
+    }
+}
+
+if (state == 'danger') {
+    if (dangers_left == 0) state = 'response'
+}
 </string>
           </argument>
         </arguments>

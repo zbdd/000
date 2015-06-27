@@ -70,17 +70,6 @@ else {draw_minutes=string(minutes)}
 
 if (seconds&lt;10) {draw_seconds=string(seconds) draw_seconds=string_insert("0",draw_seconds,0)}
 else {draw_seconds=string(seconds)}
-
-if (string_length(text) &gt; 0) {
-    // Reset text
-    button = instance_position(mouse_x, mouse_y, o_button)
-    if (mouse_check_button(mb_any)  &amp;&amp; button != noone) {
-        if (button.text = 'OKAY') {
-            text = ''
-            close.text = ''
-        }
-    } else close.text = 'OKAY'
-}
 </string>
           </argument>
         </arguments>
@@ -126,7 +115,6 @@ if (global.control.state == 'danger') {
             if (o_player.log[| idx] == 'service arrived') count++
             
             if (count &gt; 0) draw_sprite(spr_tick, 0, x + 175 + (40 * count), y + 40)
-            if (count == global.control.dangers) global.control.state = 'response'
         }
     }
 }
