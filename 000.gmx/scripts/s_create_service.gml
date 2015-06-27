@@ -29,11 +29,11 @@ for (idx = 0; idx < instance_number(o_casualty); idx++) {
                 break;
                     
                 case 'police':
+                    if (instance_number(o_vehicle) == 0) instance_create(128, 256, o_vehicle)
                     man = instance_create(casualty.x - 16, casualty.y, o_service)
                 break;
             }
         }
     }
 }
-
 

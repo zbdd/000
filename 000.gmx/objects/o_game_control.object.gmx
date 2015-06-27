@@ -38,6 +38,7 @@ calling = false
 TIMER_MAX = 3 * room_speed;
 timer = TIMER_MAX
 state = 'danger'
+dangers = 0
 </string>
           </argument>
         </arguments>

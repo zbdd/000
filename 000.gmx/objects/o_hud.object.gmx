@@ -126,7 +126,7 @@ if (global.control.state == 'danger') {
             if (o_player.log[| idx] == 'service arrived') count++
             
             if (count &gt; 0) draw_sprite(spr_tick, 0, x + 175 + (40 * count), y + 40)
-            if (count == global.control.danger_done) global.control.state = 'response'
+            if (count == global.control.dangers) global.control.state = 'response'
         }
     }
 }

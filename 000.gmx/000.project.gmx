@@ -31,6 +31,7 @@
       <sprite>sprites\spr_police</sprite>
       <sprite>sprites\spr_elec</sprite>
       <sprite>sprites\spr_ses</sprite>
+      <sprite>sprites\spr_police_wagon</sprite>
     </sprites>
     <sprite>sprites\spr_spotted</sprite>
   </sprites>
@@ -60,8 +61,6 @@
     <objects name="NPC">
       <object>objects\o_casualty</object>
       <object>objects\o_service</object>
-    </objects>
-    <objects name="WORLD">
       <object>objects\o_vehicle</object>
     </objects>
     <objects name="MENU">
