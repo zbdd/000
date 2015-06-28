@@ -33,6 +33,7 @@ selected = false
 go_to = noone
 state = 'idle'
 move_speed = 1
+analysis = instance_create(x, y, o_analysis)
 
 image_speed = 0
 image_index = irandom(4)

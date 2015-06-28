@@ -30,9 +30,9 @@ MAX_HEIGHT = 200
 MAX_WIDTH = 200
 height = 1;
 width = 1;
-state = 'init'
+state = 'idle'
 expand_speed = 2
-alarm[0] = expand_speed * room_speed
+body = noone
 depth = -99999999 // draw on top of everything
 </string>
           </argument>
@@ -58,7 +58,7 @@ depth = -99999999 // draw on top of everything
             <kind>1</kind>
             <string>height = MAX_HEIGHT
 width = MAX_WIDTH
-state = 'idle'
+state = 'draw'
 </string>
           </argument>
         </arguments>
@@ -82,6 +82,10 @@ state = 'idle'
           <argument>
             <kind>1</kind>
             <string>/// INIT
+
+if (state == 'idle') {
+    alarm[0] = expand_speed * room_speed
+}
 if (state == 'init') {
     height += MAX_HEIGHT/(expand_speed * room_speed)
     width += MAX_WIDTH/(expand_speed * room_speed)
@@ -110,15 +114,25 @@ if (state == 'init') {
             <kind>1</kind>
             <string>draw_self();
 
-// fill
-draw_set_colour(c_black)
-draw_rectangle(view_wview[0]/2 - width/2, view_hview[0]/2 - height/2,
-                view_wview[0]/2 + width/2, view_hview[0]/2 + height/2, false)
-       
-// border       
-draw_set_colour(c_red)
-draw_rectangle(view_wview[0]/2 - width/2, view_hview[0]/2 - height/2,
-                view_wview[0]/2 + width/2, view_hview[0]/2 + height/2, true)
+if (state != 'idle') {
+    // fill
+    draw_set_colour(c_black)
+    draw_rectangle(view_wview[0]/2 - width/2, view_hview[0]/2 - height/2,
+                    view_wview[0]/2 + width/2, view_hview[0]/2 + height/2, false)
+           
+    // border       
+    draw_set_colour(c_red)
+    draw_rectangle(view_wview[0]/2 - width/2, view_hview[0]/2 - height/2,
+                    view_wview[0]/2 + width/2, view_hview[0]/2 + height/2, true)
+}
+
+if(state == 'draw' &amp;&amp; body != noone) {
+    draw_sprite_stretched(body.sprite_index, 0,
+                            view_wview[0]/2 - width/2,
+                            view_hview[0]/2 - height/2,
+                            width,
+                            height)            
+}       
 </string>
           </argument>
         </arguments>

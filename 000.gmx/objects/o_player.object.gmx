@@ -171,6 +171,8 @@ if (state == 'menu') {
                             ds_list_add(o_player.log, 'danger checked')
                             ds_list_add(casualty.problems, casualty.actions[| 0].type)
                             global.control.danger_done++
+                            casualty.analysis.state = 'init'
+                            casualty.analysis.body = casualty
                         }
                     }
                 break
