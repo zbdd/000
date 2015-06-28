@@ -34,6 +34,7 @@
       <sprite>sprites\spr_police_wagon</sprite>
     </sprites>
     <sprite>sprites\spr_spotted</sprite>
+    <sprite>sprites\spr_spot</sprite>
     <sprite>sprites\spr_service_start</sprite>
     <sprite>sprites\spr_casualty_start</sprite>
     <sprite>sprites\spr_carpark</sprite>
@@ -80,6 +81,7 @@
     </objects>
     <objects name="DANGER">
       <object>objects\o_danger</object>
+      <object>objects\o_analysis</object>
     </objects>
     <objects name="LEVEL SETUP">
       <object>objects\o_service_start</object>

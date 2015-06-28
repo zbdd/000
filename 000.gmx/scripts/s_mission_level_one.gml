@@ -2,6 +2,8 @@ control = argument0;
 TEST_CASUALTIES = 2
 control.dangers = 2;
 
+//var analyse = instance_create(x, y, o_analysis) for testing purposes
+
 var player = instance_create(
     max(o_service_start.x, irandom(x + o_service_start.sprite_width)),
     max(o_service_start.y, irandom(y + o_service_start.sprite_height)), o_player)
@@ -39,6 +41,7 @@ for (idx = 0; idx < TEST_CASUALTIES; idx++) {
         ds_list_add(control.objects, casualty);
         attempt = 0
     } else {
+        with (casualty) { instance_destroy() }
         idx--
         attempt++
     }
