@@ -113,7 +113,7 @@ if (state == 'idle' &amp;&amp; speed == 0) {
             if (casualty == noone) {
                 casualty = instance_position(mouse_x, mouse_y, o_player)
             } else {
-                menu = s_create_menu(mouse_x, mouse_y)
+                menu = s_create_menu(mouse_x, mouse_y, casualty.menu_items)
                 casualty.selected = true
                 next_state = 'menu'
             }
@@ -170,9 +170,8 @@ if (state == 'menu') {
                         if (problem == -1) {
                             ds_list_add(o_player.log, 'danger checked')
                             ds_list_add(casualty.problems, casualty.actions[| 0].type)
+                            ds_list_delete(casualty.menu_items, ds_list_find_index(casualty.menu_items, 'danger'))
                             global.control.danger_done++
-                            casualty.analysis.state = 'init'
-                            casualty.analysis.body = casualty
                         }
                     }
                 break

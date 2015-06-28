@@ -31,7 +31,7 @@ MAX_WIDTH = 200
 height = 1;
 width = 1;
 state = 'idle'
-expand_speed = 2
+expand_speed = 0.5 // higher = slower.. i know i know, fuck you
 body = noone
 depth = -99999999 // draw on top of everything
 </string>
@@ -126,6 +126,7 @@ if (state != 'idle') {
                     view_wview[0]/2 + width/2, view_hview[0]/2 + height/2, true)
 }
 
+// draw the body
 if(state == 'draw' &amp;&amp; body != noone) {
     draw_sprite_stretched(body.sprite_index, 0,
                             view_wview[0]/2 - width/2,

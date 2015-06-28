@@ -35,6 +35,10 @@ state = 'idle'
 move_speed = 1
 analysis = instance_create(x, y, o_analysis)
 
+menu_items = ds_list_create()
+ds_list_add(menu_items, 'danger')
+ds_list_add(menu_items, 'look')
+
 image_speed = 0
 image_index = irandom(4)
 
@@ -46,9 +50,11 @@ actions = ds_list_create() // holds the actions
 active = 1 // buttons active for this menu
 
 // testing shit
-//danger = s_add_danger('live wire is near the casualty', 'elec')
-danger = s_add_rand_danger()
-ds_list_add(actions, danger);
+//danger = s_add_danger('live wire is near the casualty', 'elec')\
+if (irandom(99) &lt; 50) {
+    danger = s_add_rand_danger()
+    ds_list_add(actions, danger);
+}
 </string>
           </argument>
         </arguments>

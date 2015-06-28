@@ -15,6 +15,8 @@
       <sprite>sprites\spr_b_c</sprite>
       <sprite>sprites\spr_b_police</sprite>
       <sprite>sprites\spr_b_ses</sprite>
+      <sprite>sprites\spr_b_check</sprite>
+      <sprite>sprites\spr_b_look</sprite>
     </sprites>
     <sprites name="WARN">
       <sprite>sprites\spr_w_psych</sprite>
@@ -76,6 +78,7 @@
       <object>objects\o_drabcde</object>
       <object>objects\o_b_c</object>
       <object>objects\o_b_elec</object>
+      <object>objects\o_b_look</object>
       <object>objects\o_b_ses</object>
       <object>objects\o_b_police</object>
     </objects>
