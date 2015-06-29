@@ -46,6 +46,7 @@
   <scripts name="scripts">
     <script>scripts\s_mission_test.gml</script>
     <script>scripts\s_mission_level_one.gml</script>
+    <script>scripts\s_mission_idea2.gml</script>
     <script>scripts\s_create_menu.gml</script>
     <script>scripts\s_create_player_menu.gml</script>
     <script>scripts\s_string_extract.gml</script>
@@ -90,9 +91,11 @@
       <object>objects\o_service_start</object>
       <object>objects\o_casualty_start</object>
       <object>objects\o_carpark</object>
+      <object>objects\o_casualty_spawner</object>
     </objects>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_test_idea2</room>
     <room>rooms\rm_level_one</room>
     <room>rooms\rm_test</room>
   </rooms>

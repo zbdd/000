@@ -77,6 +77,28 @@ if (next_state != 'menu') {
 }
     
 state = next_state
+
+// CAMERA
+//first place the view so it centers your object sprite
+view_xview = x - view_wview / 2 + sprite_width / 2;
+view_yview = y - view_hview / 2 + sprite_height / 2;
+//then check if you are out of bound and place it inbound if it's out
+if(view_xview &lt; 0) 
+{
+    view_xview = 0;
+}
+else if(view_xview &gt; room_width - view_wview)
+{
+    view_xview = room_width - view_wview
+}
+if(view_yview &lt; 0)
+{
+    view_yview = 0;
+}
+else if(view_yview &gt; room_height - view_hview)
+{
+    view_yview = room_height - view_hview
+}
 </string>
           </argument>
         </arguments>

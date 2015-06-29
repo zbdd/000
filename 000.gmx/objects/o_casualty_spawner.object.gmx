@@ -25,19 +25,13 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>randomize();
-debug = true;
-score = 0;
-level = 0;
-objects = ds_list_create();
-danger_check = instance_number(o_casualty) + 1 // check for danger
-danger_done = 0
-hud = instance_create(x, y, o_hud);
-calling = false
-TIMER_MAX = 3 * room_speed;
-timer = TIMER_MAX
-state = 'danger'
-dangers = 0
+            <string>where = noone
+max_spawn = 5
+spawn = 0
+continuous = true
+spawn_rate = 5 * room_speed
+spawn_region = o_casualty_start
+alarm[0] = spawn_rate
 </string>
           </argument>
         </arguments>
@@ -60,52 +54,18 @@ dangers = 0
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>calling = false
-timer = TIMER_MAX
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="3" enumb="0">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if (calling) {
-    timer--
-} else {
-    timer = TIMER_MAX
-}
+            <string>alarm[0] = spawn_rate
 
-if (timer &lt; 0) {
-    calling = false
-}
+x = max(o_casualty_start.x, irandom(x + spawn_region.sprite_width))
+y = max(o_casualty_start.y, irandom(y + spawn_region.sprite_height))
 
-var dangers_left = 0
-for (var idx = 0; idx &lt; instance_number(o_casualty); idx++) {
-    var casualty = instance_find(o_casualty, idx)
-    
-    for (var idy = 0; idy &lt; ds_list_size(casualty.actions); idy++) {
-        dangers_left++
-    }
-}
+var casualty = s_create_casualty(
+                x, 
+                y,
+                'casualty_' + string(spawn + 1),
+                'default description')
 
-if (state == 'danger') {
-    if (dangers_left == 0) state = 'response'
-}
+spawn++
 </string>
           </argument>
         </arguments>
