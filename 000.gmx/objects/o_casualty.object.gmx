@@ -34,7 +34,7 @@ go_to = noone
 state = 'idle'
 move_speed = 1
 analysis = instance_create(x, y, o_analysis)
-
+path = path_add()
 menu_items = ds_list_create()
 ds_list_add(menu_items, 'danger')
 ds_list_add(menu_items, 'look')
@@ -80,7 +80,11 @@ if (irandom(99) &lt; 50) {
             <string>/// IDLE
 depth = y * -1;
 if (state == 'idle') {
-    if (go_to != noone) state = 'move'
+    if (go_to != noone) {
+        state = 'move'
+        mp_grid_path(global.path.grid, path, x, y, go_to.x, go_to.y, true)
+        path_start(path, move_speed, path_action_reverse, 0)
+    }
 }
 </string>
           </argument>
@@ -103,9 +107,8 @@ if (state == 'idle') {
           <argument>
             <kind>1</kind>
             <string>/// MOVE
+
 if (state == 'move') {
-    move_towards_point(go_to.x, go_to.y, move_speed)
-    
     if (object_get_name(go_to) == 'o_store' &amp;&amp; distance_to_object(go_to) &lt; 16) go_to = noone 
 
     if (go_to == noone) state = 'idle'   

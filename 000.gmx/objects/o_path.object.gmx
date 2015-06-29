@@ -25,10 +25,11 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>width = floor(room_width/16)
-height = floor(room_height/16)
-grid = ds_grid_create(width, height) // roughly 16x16 grids e'ry where yo
-ds_grid_set_region(grid, 0, 0, width, height, 1) // weighted all as 1 for now 
+            <string>width = floor(room_width/4)
+height = floor(room_height/4)
+//grid = ds_grid_create(width, height) // roughly 16x16 grids e'ry where yo
+//ds_grid_set_region(grid, 0, 0, width, height, 1) // weighted all as 1 for now 
+grid = mp_grid_create(0, 0, room_width, room_height, 4, 4)
 </string>
           </argument>
         </arguments>
@@ -51,7 +52,7 @@ ds_grid_set_region(grid, 0, 0, width, height, 1) // weighted all as 1 for now
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>depth = 1
+            <string>/*depth = 1
 for (idw = floor(x/16); idw &lt; floor(width); idw++) {
     for (idh = floor(y/16); idh &lt; floor(height); idh++) {
         weight = grid[# idw, idh]
@@ -59,7 +60,7 @@ for (idw = floor(x/16); idw &lt; floor(width); idw++) {
         draw_set_colour(col)
         draw_rectangle(idw * 16, idh * 16, idw * 16 + 16, idh * 16 + 16, false)
     }
-}
+}*/
 </string>
           </argument>
         </arguments>
