@@ -40,6 +40,10 @@
     <sprite>sprites\spr_service_start</sprite>
     <sprite>sprites\spr_casualty_start</sprite>
     <sprite>sprites\spr_carpark</sprite>
+    <sprites name="STORE">
+      <sprite>sprites\spr_store</sprite>
+      <sprite>sprites\spr_fap</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -92,6 +96,10 @@
       <object>objects\o_casualty_start</object>
       <object>objects\o_carpark</object>
       <object>objects\o_casualty_spawner</object>
+    </objects>
+    <objects name="STORE">
+      <object>objects\o_fap</object>
+      <object>objects\o_store</object>
     </objects>
   </objects>
   <rooms name="rooms">

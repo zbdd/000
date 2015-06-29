@@ -26,7 +26,7 @@
           <argument>
             <kind>1</kind>
             <string>ds_list_add(o_player.log, 'service arrived')
-depth = y * -2
+
 go_to = noone
 vehicle = noone
 move_speed = 1
@@ -54,6 +54,8 @@ state = 'idle'
           <argument>
             <kind>1</kind>
             <string>/// IDLE
+depth = y * -1
+
 if (state == 'idle') {
     if (go_to != noone) state = 'move'
 }
