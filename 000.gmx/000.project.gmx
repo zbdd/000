@@ -66,7 +66,10 @@
     <font>fonts\f_drabcde_small</font>
   </fonts>
   <objects name="objects">
-    <object>objects\o_game_control</object>
+    <objects name="SYSTEM">
+      <object>objects\o_game_control</object>
+      <object>objects\o_path</object>
+    </objects>
     <objects name="PLAYER">
       <object>objects\o_player</object>
       <object>objects\o_hud</object>
