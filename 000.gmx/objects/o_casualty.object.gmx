@@ -36,6 +36,9 @@ move_speed = 1
 analysis = instance_create(x, y, o_analysis)
 path = path_add()
 menu_items = ds_list_create()
+state_time = 0;
+tmp_waypoint = ds_list_create()
+life = max(15 * room_speed, irandom(60) * room_speed)
 ds_list_add(menu_items, 'danger')
 ds_list_add(menu_items, 'look')
 
@@ -79,12 +82,47 @@ if (irandom(99) &lt; 50) {
             <kind>1</kind>
             <string>/// IDLE
 depth = y * -1;
+state_time++
+life--
+
 if (state == 'idle') {
+    if (life &lt; 0) {
+       go_to = o_casualty_end
+    }
     if (go_to != noone) {
         state = 'move'
+        //show_debug_message("x: " + string(go_to.x) + "y: " + string(go_to.y))
+        for(idw = 0; idw &lt; ds_list_size(tmp_waypoint); idw++) {
+            with (tmp_waypoint[| idw]) instance_destroy()
+        }
+        ds_list_clear(tmp_waypoint) // remove previous
+        if (!mp_grid_path(global.path.grid, path, x, y, go_to.x, go_to.y, true)) {
+            for(ida = 0; ida &lt; 361; ida+=45) {
+                cx = go_to.x + 32 * cos(ida * pi / 180);
+                cy = go_to.y + 32 * sin(ida * pi / 180);
+                ds_list_add(tmp_waypoint, instance_create(cx,cy,o_waypoint))
+            }
+        }
+        closest = distance_to_object(go_to)
+        for(idw = 0; idw &lt; ds_list_size(tmp_waypoint); idw++) {
+            change = false
+            with (tmp_waypoint[| idw]) {
+                show_debug_message("closest: " + string(other.closest) + " this: " + string(distance_to_object(other)));
+                if(distance_to_object(other) &lt; other.closest) other.change = true
+            }
+            if (change) go_to = tmp_waypoint[| idw]
+        }
+        //show_debug_message("x: " + string(go_to.x) + "y: " + string(go_to.y))
         mp_grid_path(global.path.grid, path, x, y, go_to.x, go_to.y, true)
-        path_start(path, move_speed, path_action_reverse, 0)
+        py = y
+        px = x
+        path_start(path, move_speed, path_action_stop, 0)
+        
     }
+    else if (state_time &gt; (5 * room_speed)) {
+        go_to = instance_find(o_store, random(instance_number(o_store)))
+    }
+    if (state != 'idle') state_time = 0
 }
 </string>
           </argument>
@@ -109,9 +147,16 @@ if (state == 'idle') {
             <string>/// MOVE
 
 if (state == 'move') {
-    if (object_get_name(go_to) == 'o_store' &amp;&amp; distance_to_object(go_to) &lt; 16) go_to = noone 
-
-    if (go_to == noone) state = 'idle'   
+    if (distance_to_object(go_to) &lt;= 30) 
+        if (o_casualty_end == go_to) {
+            ds_list_add(o_player.log, 'casualty left')
+            instance_destroy()
+        }
+        else go_to = noone 
+    
+    if (go_to == noone) {
+        state = 'idle'   
+    }
 }    
 </string>
           </argument>
@@ -139,7 +184,10 @@ if (state == 'move') {
 draw_set_font(f_drabcde)
 draw_set_colour(c_red)
 draw_text(x - sprite_width, y - sprite_height, name)
-
+if (path != noone) {
+    draw_set_colour(c_red)
+    draw_path(path, px, py, false);
+}
 if (selected) {
     for (idx = 0; idx &lt; ds_list_size(problems); idx++) {
         problem_to_draw = "spr_w_" + string(problems[| idx])

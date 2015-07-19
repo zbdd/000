@@ -27,42 +27,13 @@
             <kind>1</kind>
             <string>depth = y * -1
 
-/*for (idw = floor(x/16); idw &lt; floor((x + sprite_width)/16); idw++) {
-    for (idh = floor(y/16); idh &lt; floor((y + sprite_height)/16); idh++) {
-        global.path.grid[# idw, idh] += 100
-    }
-}*/
-
-mp_grid_add_instances(global.path.grid, self, true)
+mp_grid_add_instances(global.path.grid, self, false)
 </string>
           </argument>
         </arguments>
       </action>
     </event>
     <event eventtype="4" ename="o_service">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>/// empty
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="4" ename="o_casualty">
       <action>
         <libid>1</libid>
         <id>603</id>

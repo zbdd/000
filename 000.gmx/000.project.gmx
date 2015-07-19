@@ -8,6 +8,7 @@
   <sprites name="sprites">
     <sprite>sprites\spr_player</sprite>
     <sprite>sprites\spr_vehicle</sprite>
+    <sprite>sprites\spr_waypoint</sprite>
     <sprite>sprites\spr_empty</sprite>
     <sprites name="MENU">
       <sprite>sprites\spr_b_danger</sprite>
@@ -51,6 +52,7 @@
     <script>scripts\s_mission_test.gml</script>
     <script>scripts\s_mission_level_one.gml</script>
     <script>scripts\s_mission_idea2.gml</script>
+    <script>scripts\s_mission_idea3.gml</script>
     <script>scripts\s_create_menu.gml</script>
     <script>scripts\s_create_player_menu.gml</script>
     <script>scripts\s_string_extract.gml</script>
@@ -69,6 +71,7 @@
     <objects name="SYSTEM">
       <object>objects\o_game_control</object>
       <object>objects\o_path</object>
+      <object>objects\o_waypoint</object>
     </objects>
     <objects name="PLAYER">
       <object>objects\o_player</object>
@@ -97,6 +100,7 @@
     <objects name="LEVEL SETUP">
       <object>objects\o_service_start</object>
       <object>objects\o_casualty_start</object>
+      <object>objects\o_casualty_end</object>
       <object>objects\o_carpark</object>
       <object>objects\o_casualty_spawner</object>
     </objects>
@@ -106,6 +110,7 @@
     </objects>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_test_idea3</room>
     <room>rooms\rm_test_idea2</room>
     <room>rooms\rm_level_one</room>
     <room>rooms\rm_test</room>
