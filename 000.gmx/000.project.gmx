@@ -27,6 +27,7 @@
     </sprites>
     <sprites name="CASUALTY">
       <sprite>sprites\spr_casualty</sprite>
+      <sprite>sprites\spr_shopping</sprite>
     </sprites>
     <sprite>sprites\spr_tick</sprite>
     <sprite>sprites\spr_box</sprite>
@@ -81,6 +82,7 @@
       <object>objects\o_casualty</object>
       <object>objects\o_service</object>
       <object>objects\o_vehicle</object>
+      <object>objects\o_event</object>
     </objects>
     <objects name="MENU">
       <object>objects\o_context_menu</object>

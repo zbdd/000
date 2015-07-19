@@ -39,6 +39,8 @@ menu_items = ds_list_create()
 state_time = 0;
 tmp_waypoint = ds_list_create()
 life = max(15 * room_speed, irandom(60) * room_speed)
+event = noone
+next_state = 'idle'
 ds_list_add(menu_items, 'danger')
 ds_list_add(menu_items, 'look')
 
@@ -80,6 +82,28 @@ if (irandom(99) &lt; 50) {
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>/// THINKING
+state = next_state;
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>/// IDLE
 depth = y * -1;
 state_time++
@@ -90,7 +114,7 @@ if (state == 'idle') {
        go_to = o_casualty_end
     }
     if (go_to != noone) {
-        state = 'move'
+        next_state = 'move'
         //show_debug_message("x: " + string(go_to.x) + "y: " + string(go_to.y))
         for(idw = 0; idw &lt; ds_list_size(tmp_waypoint); idw++) {
             with (tmp_waypoint[| idw]) instance_destroy()
@@ -100,14 +124,16 @@ if (state == 'idle') {
             for(ida = 0; ida &lt; 361; ida+=45) {
                 cx = go_to.x + 32 * cos(ida * pi / 180);
                 cy = go_to.y + 32 * sin(ida * pi / 180);
-                ds_list_add(tmp_waypoint, instance_create(cx,cy,o_waypoint))
+                var waypoint = instance_create(cx,cy,o_waypoint);
+                waypoint.parent = go_to;
+                ds_list_add(tmp_waypoint, waypoint)
             }
         }
         closest = distance_to_object(go_to)
         for(idw = 0; idw &lt; ds_list_size(tmp_waypoint); idw++) {
             change = false
             with (tmp_waypoint[| idw]) {
-                show_debug_message("closest: " + string(other.closest) + " this: " + string(distance_to_object(other)));
+                //show_debug_message("closest: " + string(other.closest) + " this: " + string(distance_to_object(other)));
                 if(distance_to_object(other) &lt; other.closest) other.change = true
             }
             if (change) go_to = tmp_waypoint[| idw]
@@ -122,7 +148,7 @@ if (state == 'idle') {
     else if (state_time &gt; (5 * room_speed)) {
         go_to = instance_find(o_store, random(instance_number(o_store)))
     }
-    if (state != 'idle') state_time = 0
+    if (next_state != 'idle') state_time = 0
 }
 </string>
           </argument>
@@ -147,17 +173,54 @@ if (state == 'idle') {
             <string>/// MOVE
 
 if (state == 'move') {
-    if (distance_to_object(go_to) &lt;= 30) 
+    if (distance_to_object(go_to) &lt;= 1) 
         if (o_casualty_end == go_to) {
             ds_list_add(o_player.log, 'casualty left')
             instance_destroy()
         }
-        else go_to = noone 
+        else {
+            if (object_get_name(go_to.parent.object_index) == "o_store") next_state = "shop"
+            go_to = noone
+        }
     
-    if (go_to == noone) {
-        state = 'idle'   
+    if (go_to == noone &amp;&amp; next_state == "move") {
+        next_state = 'idle'   
     }
+    if (next_state != 'move') state_time = 0
 }    
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// SHOP
+if(state == "shop") {
+    if (state_time &gt; 5 * room_speed) next_state = "idle"
+    if (event == noone &amp;&amp; state_time &gt; room_speed) {
+        event = instance_create(x, y, o_event)
+    }   
+    
+    if (next_state != 'shop') {
+        state_time = 0;
+        with (event) { instance_destroy(); }
+        event = noone;
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -183,7 +246,7 @@ if (state == 'move') {
             <string>draw_self()
 draw_set_font(f_drabcde)
 draw_set_colour(c_red)
-draw_text(x - sprite_width, y - sprite_height, name)
+draw_text(x - sprite_width, y - sprite_height, state)
 if (path != noone) {
     draw_set_colour(c_red)
     draw_path(path, px, py, false);
