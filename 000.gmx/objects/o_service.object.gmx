@@ -29,8 +29,10 @@
 
 go_to = noone
 vehicle = noone
+path = path_add()
 move_speed = 1
 state = 'idle'
+image_speed = 0
 </string>
           </argument>
         </arguments>
@@ -57,7 +59,12 @@ state = 'idle'
 depth = y * -1
 
 if (state == 'idle') {
-    if (go_to != noone) state = 'move'
+    if (go_to != noone) {
+        state = 'move'
+        go_to = s_find_nearest_spot(go_to)
+        mp_grid_path(global.path.grid, path, x, y, go_to.x, go_to.y, true)
+        path_start(path,move_speed,path_action_stop,false)
+    }
 }
 </string>
           </argument>
@@ -82,15 +89,7 @@ if (state == 'idle') {
             <string>/// MOVE
 
 if (state == 'move') { 
-    if (go_to.go_to == noone &amp;&amp; distance_to_object(go_to) &lt; 17) { // move towards vehicle
-        go_to.go_to = o_vehicle
-        go_to.state = 'move'
-    
-    } else if (distance_to_object(go_to.go_to) &lt; 17) {
-        s_police_done(self, go_to)
-    }
-    else move_towards_point(go_to.x - 16, go_to.y, move_speed) // move towards casualty
-
+    if (speed = 0) state = 'idle'
 }
 </string>
           </argument>

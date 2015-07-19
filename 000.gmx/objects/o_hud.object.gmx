@@ -32,6 +32,8 @@ minutes = 0
 draw_seconds = "00"
 draw_minutes = "00"
 close = instance_create(x, y, o_button)
+
+instance_create(view_wview[0] - 90, view_yview[0] + 20, o_fa)
 </string>
           </argument>
         </arguments>
@@ -93,12 +95,14 @@ else {draw_seconds=string(seconds)}
           <argument>
             <kind>1</kind>
             <string>/// Draw GUI
+x = view_xview[0] + 20
+y = view_yview[0] + 20
 draw_set_colour(c_red)
 draw_set_font(f_drabcde)
 draw_text(x, y, "Time: " + draw_minutes + "m : " + draw_seconds + "s") // Draw time with a colon as a separator
 
 // Main task ahead progress update
-if (global.control.state == 'danger') {
+/*if (global.control.state == 'danger') {
     if (global.control.danger_check &gt; 0) {
         draw_text(x + 160, y, 'DANGER')
         
@@ -121,7 +125,7 @@ if (global.control.state == 'danger') {
 if (global.control.state == 'response') {
     draw_text(x + 160, y, 'RESPONSE')
 }
-
+*/
 // if calling services, show progress
 if (global.control.calling) {
     draw_set_colour(c_black)
@@ -137,9 +141,13 @@ if (global.control.calling) {
 for (idx = 0; idx &lt; ds_list_size(o_player.log) &amp;&amp; idx &lt; 5; idx++) {
     draw_set_colour(c_red)
     draw_set_font(f_drabcde_small)
-    draw_text(x, y + 60, 'Action log:')
+    draw_text(x,y + 60, 'Action log:')
     draw_text(x, y + 80 + (20 * idx), o_player.log[| ds_list_size(o_player.log) - idx - 1])
 }
+
+draw_set_colour(c_red)
+draw_set_font(f_drabcde)
+draw_text(view_wview[0] - 90, view_yview[0] + 20, "Services")
 </string>
           </argument>
         </arguments>

@@ -62,7 +62,9 @@
     <script>scripts\s_add_rand_danger.gml</script>
     <script>scripts\s_find_sprite.gml</script>
     <script>scripts\s_create_service.gml</script>
+    <script>scripts\s_call_service.gml</script>
     <script>scripts\s_police_done.gml</script>
+    <script>scripts\s_find_nearest_spot.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_drabcde</font>
@@ -82,7 +84,12 @@
       <object>objects\o_casualty</object>
       <object>objects\o_service</object>
       <object>objects\o_vehicle</object>
-      <object>objects\o_event</object>
+      <objects name="EVENTS">
+        <object>objects\o_event</object>
+      </objects>
+      <objects name="CALL SERVICES">
+        <object>objects\o_fa</object>
+      </objects>
     </objects>
     <objects name="MENU">
       <object>objects\o_context_menu</object>
