@@ -55,9 +55,10 @@ image_speed = 0
     x = mouse_x
     y = mouse_y
 } else {
-    x = view_wview[0] - 80
-    y = view_yview[0] + 60
+    x = view_xview + view_wview - 60
+    y = view_yview + 60
 }
+show_debug_message(x)
 if ( selected &amp;&amp; mouse_check_button_pressed(mb_left)) {
     var service = s_call_service("ambo");
     var waypoint = instance_create(mouse_x, mouse_y, o_waypoint);

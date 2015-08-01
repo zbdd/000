@@ -33,7 +33,7 @@ draw_seconds = "00"
 draw_minutes = "00"
 close = instance_create(x, y, o_button)
 
-instance_create(view_wview[0] - 90, view_yview[0] + 20, o_fa)
+instance_create(x + view_wview - 60, view_yview + 20, o_fa)
 </string>
           </argument>
         </arguments>
@@ -147,7 +147,7 @@ for (idx = 0; idx &lt; ds_list_size(o_player.log) &amp;&amp; idx &lt; 5; idx++) 
 
 draw_set_colour(c_red)
 draw_set_font(f_drabcde)
-draw_text(view_wview[0] - 90, view_yview[0] + 20, "Services")
+draw_text(x + view_wview - 100, view_yview + 20, "Services")
 </string>
           </argument>
         </arguments>
