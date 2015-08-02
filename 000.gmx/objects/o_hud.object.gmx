@@ -127,16 +127,20 @@ if (global.control.state == 'response') {
 }
 */
 // if calling services, show progress
-if (global.control.calling) {
-    draw_set_colour(c_black)
-    draw_rectangle(x + 320, y, x + 420, y + 30, false)
-    draw_set_colour(c_red)
-    draw_rectangle(x + 320, y, x + 320 + ((global.control.timer/global.control.TIMER_MAX) * 100), y + 30, false)
-    draw_set_colour(c_black)
-    draw_set_font(f_drabcde_small)
-    draw_text(x + 320, y + 7, 'Calling services')
+if (instance_exists(global.control)) {
+    if (global.control.calling) {
+        draw_set_colour(c_black)
+        draw_rectangle(x + 320, y, x + 420, y + 30, false)
+        draw_set_colour(c_red)
+        draw_rectangle(x + 320, y, x + 320 + ((global.control.timer/global.control.TIMER_MAX) * 100), y + 30, false)
+        draw_set_colour(c_black)
+        draw_set_font(f_drabcde_small)
+        draw_text(x + 320, y + 7, 'Calling services')
+    }
+
+    // draw the current budget
+    draw_text(x, y + 40, "Budget: " + string(global.control.budget));
 }
-draw_text(x, y + 40, "Budget: " + string(global.control.budget));
 // debug purposes, show what the user has done
 for (idx = 0; idx &lt; ds_list_size(o_player.log) &amp;&amp; idx &lt; 5; idx++) {
     draw_set_colour(c_red)

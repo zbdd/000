@@ -45,6 +45,7 @@ my_health = 5
 is_seeking_help = false
 found_ambo = false
 effect = "default"
+timer = 0;
 ds_list_add(menu_items, 'danger')
 ds_list_add(menu_items, 'look')
 
@@ -262,24 +263,42 @@ if(state == "shop") {
             <kind>1</kind>
             <string>///EFFECT:SICK
 
-// healing
-if (effect == 'sick' &amp;&amp; is_seeking_help &amp;&amp; alarm[0] &lt; 0 &amp;&amp; state != 'move') {
-    alarm[0] = 3 * room_speed;
-    event = instance_create(x, y, o_event);
-    event.sprite_index = spr_healing;
-}
+if (effect == 'sick') {
+    // make others sick
+    for(idx = 0; idx &lt; instance_number(o_casualty); idx++) {
+        near_by = instance_find(o_casualty, idx);
+        if (instance_exists(near_by)) {
+            if (distance_to_object(near_by) &lt; global.control.sick_radius
+                &amp;&amp; distance_to_object(near_by) &gt; 3) {
+                
+                near_by.timer++;
+                if (near_by.timer &gt; global.control.sick_min_time) {
+                    s_take_life(near_by)
+                    near_by.timer = 0
+                }
+            }
+        }
+    }
 
-// find help
-if (effect == 'sick' &amp;&amp; ! is_seeking_help) {
-    found_ambo = false;
-    for(idx = 0; idx &lt; instance_number(o_service); idx++) {
-        service = instance_find(o_service, idx);
-        if (service.sprite_index == spr_player) { // find an ambulance officer
-            if (distance_to_object(service) &lt;= 60) {
-                go_to = service;
-                next_state = 'idle';
-                is_seeking_help = true;
-                found_ambo = true
+    // healing
+    if (is_seeking_help &amp;&amp; alarm[0] &lt; 0 &amp;&amp; state != 'move') {
+        alarm[0] = 3 * room_speed;
+        event = instance_create(x, y, o_event);
+        event.sprite_index = spr_healing;
+    }
+
+    // find help
+    if (! is_seeking_help) {
+        found_ambo = false;
+        for(idx = 0; idx &lt; instance_number(o_service); idx++) {
+            service = instance_find(o_service, idx);
+            if (service.sprite_index == spr_player) { // find an ambulance officer
+                if (distance_to_object(service) &lt;= 60) {
+                    go_to = service;
+                    next_state = 'idle';
+                    is_seeking_help = true;
+                    found_ambo = true
+                }
             }
         }
     }
@@ -306,7 +325,7 @@ if (effect == 'sick' &amp;&amp; ! is_seeking_help) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>event = s_take_life(self)
+            <string>s_take_life(self)
 </string>
           </argument>
         </arguments>
@@ -343,6 +362,10 @@ if (selected) {
         draw_sprite(s_find_sprite(problems[| idx]), 0, x + (10 * idx), y - 50)
     }
 }
+/*if (effect == 'sick') {
+    draw_set_color(c_green)
+    draw_circle(x, y, global.control.sick_radius, true);
+}*/
 </string>
           </argument>
         </arguments>

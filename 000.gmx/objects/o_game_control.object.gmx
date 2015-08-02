@@ -39,6 +39,10 @@ TIMER_MAX = 3 * room_speed;
 timer = TIMER_MAX
 state = 'danger'
 dangers = 0
+
+// CONSTANTS
+sick_radius = 20
+sick_min_time = 3 * room_speed
 </string>
           </argument>
         </arguments>

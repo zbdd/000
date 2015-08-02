@@ -59,12 +59,6 @@ parent = o_casualty;
     x = view_xview + view_wview - 60
     y = view_yview + 60
 }
-
-if (mouse_check_button_pressed(mb_left)) {
-    if (selected) {
-        
-    }
-}
 </string>
           </argument>
         </arguments>
