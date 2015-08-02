@@ -33,7 +33,6 @@ state = 'thinking'
 next_state = 'idle'
 actions = ds_list_create()
 log = ds_list_create()
-hud = instance_create(x, y, o_hud)
 menu = ds_list_create()
 problems = ds_list_create()
 selected = false
@@ -127,7 +126,7 @@ if (state == 'idle' &amp;&amp; speed == 0) {
     if (mouse_check_button(mb_left)) {
         if (place_meeting(mouse_x, mouse_y, o_fa))
             next_state = "interrupt"
-        else move_towards_point(mouse_x, mouse_y, move_speed)
+        else if (! o_fa.selected) move_towards_point(mouse_x, mouse_y, move_speed)
     }
     else speed = 0
     

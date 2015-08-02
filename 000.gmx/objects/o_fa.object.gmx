@@ -60,15 +60,41 @@ parent = o_casualty;
     y = view_yview + 60
 }
 
-if ( selected &amp;&amp; mouse_check_button_pressed(mb_left)) {
+if (mouse_check_button_pressed(mb_left)) {
+    if (selected) {
+        
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (! selected) selected = true
+else {
+    selected = false;
     var service = s_call_service("ambo");
     var waypoint = instance_create(mouse_x, mouse_y, o_waypoint);
-    
-    service.go_to = waypoint;
-    selected = false 
-}
-else if (place_meeting(mouse_x, mouse_y, o_fa) &amp;&amp; mouse_check_button_pressed(mb_left)) selected = true
 
+    service.go_to = waypoint;
+}
 </string>
           </argument>
         </arguments>

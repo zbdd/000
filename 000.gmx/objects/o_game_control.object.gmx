@@ -29,6 +29,7 @@
 debug = true;
 score = 0;
 level = 0;
+budget = 200
 objects = ds_list_create();
 danger_check = instance_number(o_casualty) + 1 // check for danger
 danger_done = 0

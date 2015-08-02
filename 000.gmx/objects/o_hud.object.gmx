@@ -25,7 +25,8 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>text = ''
+            <string>text = '';
+budget = 0
 steps = 0
 seconds = 0
 minutes = 0
@@ -33,7 +34,7 @@ draw_seconds = "00"
 draw_minutes = "00"
 close = instance_create(x, y, o_button)
 
-instance_create(x + view_wview - 60, view_yview + 20, o_fa)
+m1 = instance_create(x + view_wview - 60, view_yview + 20, o_fa)
 </string>
           </argument>
         </arguments>
@@ -60,7 +61,6 @@ instance_create(x + view_wview - 60, view_yview + 20, o_fa)
 y = view_yview[0] + 10
 close.x = x + 60
 close.y = y + 80
-
 
 steps += 1
 minutes = floor((steps/room_speed)/60) // Figure out the minutes
@@ -136,7 +136,7 @@ if (global.control.calling) {
     draw_set_font(f_drabcde_small)
     draw_text(x + 320, y + 7, 'Calling services')
 }
-
+draw_text(x, y + 40, "Budget: " + string(global.control.budget));
 // debug purposes, show what the user has done
 for (idx = 0; idx &lt; ds_list_size(o_player.log) &amp;&amp; idx &lt; 5; idx++) {
     draw_set_colour(c_red)
