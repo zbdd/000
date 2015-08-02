@@ -263,8 +263,10 @@ if(state == "shop") {
             <string>///EFFECT:SICK
 
 // healing
-if (effect == 'sick' &amp;&amp; is_seeking_help &amp;&amp; alarm[0] &lt; 0) {
+if (effect == 'sick' &amp;&amp; is_seeking_help &amp;&amp; alarm[0] &lt; 0 &amp;&amp; state != 'move') {
     alarm[0] = 3 * room_speed;
+    event = instance_create(x, y, o_event);
+    event.sprite_index = spr_healing;
 }
 
 // find help
@@ -275,7 +277,7 @@ if (effect == 'sick' &amp;&amp; ! is_seeking_help) {
         if (service.sprite_index == spr_player) { // find an ambulance officer
             if (distance_to_object(service) &lt;= 60) {
                 go_to = service;
-                next_state = 'move';
+                next_state = 'idle';
                 is_seeking_help = true;
                 found_ambo = true
             }

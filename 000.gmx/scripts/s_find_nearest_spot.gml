@@ -1,7 +1,7 @@
 tmp_waypoint = ds_list_create()
 go_to = argument0
 if (!mp_grid_path(global.path.grid, path, x, y, go_to.x, go_to.y, true)) {
-    for(ida = 0; ida < 361; ida+=45) {
+    for(ida = 0; ida < 361; ida+=min(15, irandom(90))) {
         cx = go_to.x + 32 * cos(ida * pi / 180);
         cy = go_to.y + 32 * sin(ida * pi / 180);
         var waypoint = instance_create(cx,cy,o_waypoint);

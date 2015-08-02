@@ -29,6 +29,7 @@
       <sprite>sprites\spr_casualty</sprite>
       <sprite>sprites\spr_shopping</sprite>
       <sprite>sprites\spr_sick</sprite>
+      <sprite>sprites\spr_healing</sprite>
     </sprites>
     <sprite>sprites\spr_tick</sprite>
     <sprite>sprites\spr_box</sprite>
@@ -77,6 +78,7 @@
       <object>objects\o_game_control</object>
       <object>objects\o_path</object>
       <object>objects\o_waypoint</object>
+      <object>objects\o_sick_controller</object>
     </objects>
     <objects name="PLAYER">
       <object>objects\o_player</object>
