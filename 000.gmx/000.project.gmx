@@ -28,6 +28,7 @@
     <sprites name="CASUALTY">
       <sprite>sprites\spr_casualty</sprite>
       <sprite>sprites\spr_shopping</sprite>
+      <sprite>sprites\spr_sick</sprite>
     </sprites>
     <sprite>sprites\spr_tick</sprite>
     <sprite>sprites\spr_box</sprite>
@@ -65,6 +66,7 @@
     <script>scripts\s_call_service.gml</script>
     <script>scripts\s_police_done.gml</script>
     <script>scripts\s_find_nearest_spot.gml</script>
+    <script>scripts\s_take_life.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_drabcde</font>

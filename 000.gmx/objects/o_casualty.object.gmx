@@ -41,6 +41,7 @@ tmp_waypoint = ds_list_create()
 life = max(15 * room_speed, irandom(60) * room_speed)
 event = noone
 next_state = 'idle'
+my_health = 5
 ds_list_add(menu_items, 'danger')
 ds_list_add(menu_items, 'look')
 
@@ -84,6 +85,12 @@ if (irandom(99) &lt; 50) {
             <kind>1</kind>
             <string>/// THINKING
 state = next_state;
+
+// Event follow casualty
+if (instance_exists(event)) {
+    event.x = x;
+    event.y = y;
+}
 </string>
           </argument>
         </arguments>
@@ -200,6 +207,29 @@ if(state == "shop") {
         event = noone;
     }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="6" enumb="4">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>event = s_take_life(self)
 </string>
           </argument>
         </arguments>
