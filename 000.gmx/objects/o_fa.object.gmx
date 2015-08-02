@@ -29,6 +29,7 @@
 sx = x
 sy = y 
 image_speed = 0
+parent = o_casualty;
 </string>
           </argument>
         </arguments>

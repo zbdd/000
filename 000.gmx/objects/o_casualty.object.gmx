@@ -42,6 +42,9 @@ life = max(15 * room_speed, irandom(60) * room_speed)
 event = noone
 next_state = 'idle'
 my_health = 5
+is_seeking_help = false
+found_ambo = false
+effect = "default"
 ds_list_add(menu_items, 'danger')
 ds_list_add(menu_items, 'look')
 
@@ -66,6 +69,32 @@ if (irandom(99) &lt; 50) {
         </arguments>
       </action>
     </event>
+    <event eventtype="2" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>my_health = 5
+is_seeking_help = false
+next_state = 'idle'
+effect = "default"
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
     <event eventtype="3" enumb="0">
       <action>
         <libid>1</libid>
@@ -85,11 +114,16 @@ if (irandom(99) &lt; 50) {
             <kind>1</kind>
             <string>/// THINKING
 state = next_state;
+state_time++
 
 // Event follow casualty
 if (instance_exists(event)) {
     event.x = x;
     event.y = y;
+}
+
+if (my_health &lt; 3) {
+    effect = 'sick';
 }
 </string>
           </argument>
@@ -113,7 +147,6 @@ if (instance_exists(event)) {
             <kind>1</kind>
             <string>/// IDLE
 depth = y * -1;
-state_time++
 life--
 
 if (state == 'idle') {
@@ -122,9 +155,9 @@ if (state == 'idle') {
     }
     if (go_to != noone) {
         next_state = 'move'
-        //show_debug_message("x: " + string(go_to.x) + "y: " + string(go_to.y))
+        
+        // Create a valid path
         go_to = s_find_nearest_spot(go_to)
-        //show_debug_message("x: " + string(go_to.x) + "y: " + string(go_to.y))
         mp_grid_path(global.path.grid, path, x, y, go_to.x, go_to.y, true)
         py = y
         px = x
@@ -211,6 +244,48 @@ if(state == "shop") {
           </argument>
         </arguments>
       </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>///EFFECT:SICK
+
+// healing
+if (effect == 'sick' &amp;&amp; is_seeking_help &amp;&amp; alarm[0] &lt; 0) {
+    alarm[0] = 3 * room_speed;
+}
+
+// find help
+if (effect == 'sick' &amp;&amp; ! is_seeking_help) {
+    found_ambo = false;
+    for(idx = 0; idx &lt; instance_number(o_service); idx++) {
+        service = instance_find(o_service, idx);
+        if (service.sprite_index == spr_player) { // find an ambulance officer
+            if (distance_to_object(service) &lt;= 60) {
+                go_to = service;
+                next_state = 'move';
+                is_seeking_help = true;
+                found_ambo = true
+            }
+        }
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
     </event>
     <event eventtype="6" enumb="4">
       <action>
@@ -255,7 +330,7 @@ if(state == "shop") {
             <string>draw_self()
 draw_set_font(f_drabcde)
 draw_set_colour(c_red)
-draw_text(x - sprite_width, y - sprite_height, state)
+draw_text(x - sprite_width, y - sprite_height, state + ":" + string(effect))
 if (path != noone) {
     draw_set_colour(c_red)
     draw_path(path, px, py, false);

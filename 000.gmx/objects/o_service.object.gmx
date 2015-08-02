@@ -33,6 +33,7 @@ path = path_add()
 move_speed = 1
 state = 'idle'
 image_speed = 0
+parent = o_casualty;
 </string>
           </argument>
         </arguments>
