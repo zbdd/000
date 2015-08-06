@@ -169,7 +169,7 @@ if (instance_exists(event)) {
             <kind>1</kind>
             <string>/// IDLE
 depth = y * -1;
-//life--
+life-- // actualy determines when they leave, not their health
 
 if (state == 'idle') {
     if (life &lt; 0) {
@@ -220,8 +220,8 @@ if (state == 'move') {
             instance_destroy()
         }
         else {
-            var parent = object_get_parent(go_to);
-            if (parent != noone) {
+            parent = go_to.parent
+            if (parent) {
                 if (object_get_name(parent.object_index) == "o_store") next_state = "shop"
             }
             go_to = noone

@@ -1,11 +1,11 @@
 tmp_waypoint = ds_list_create()
 go_to = argument0
 attempt = 0;
+radius = 10
 while (!mp_grid_path(global.path.grid, path, x, y, go_to.x, go_to.y, true)) {
-    attempt++;
     for(ida = 0; ida < 361; ida+=min(45, irandom(90))) {
-        cx = go_to.x + (attempt * 10) + 32 * cos(ida * pi / 180);
-        cy = go_to.y + (attempt * 10) + 32 * sin(ida * pi / 180);
+        cx = go_to.x + (attempt * 10) + radius * cos(ida * pi / 180);
+        cy = go_to.y + (attempt * 10) + radius * sin(ida * pi / 180);
         var waypoint = instance_create(cx,cy,o_waypoint);
         waypoint.parent = go_to;
         ds_list_add(tmp_waypoint, waypoint)
@@ -27,10 +27,14 @@ while (!mp_grid_path(global.path.grid, path, x, y, go_to.x, go_to.y, true)) {
     }
     for(idw = 0; idw < ds_list_size(tmp_waypoint); idw++) {
         go_to = tmp_waypoint[| idw]
-        if (mp_grid_path(global.path.grid, path, x, y, go_to.x, go_to.y, true)) return go_to
+        if (mp_grid_path(global.path.grid, path, x, y, go_to.x, go_to.y, true)) {
+            go_to.parent = argument0
+            return go_to
+        }
         else with (tmp_waypoint[| idw]) instance_destroy() // release
     }
     ds_list_clear(tmp_waypoint)
     go_to = argument0
+    attempt++;
 }
 return go_to
