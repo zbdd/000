@@ -45,7 +45,10 @@ my_health = 5
 is_seeking_help = false
 found_ambo = false
 effect = "default"
+next_effect = effect;
 timer = 0;
+wait_for_effect = 2 * room_speed; // delay in effect changes
+alarm[9] = 1;
 ds_list_add(menu_items, 'danger')
 ds_list_add(menu_items, 'look')
 
@@ -65,6 +68,29 @@ if (irandom(99) &lt; 50) {
     danger = s_add_rand_danger()
     ds_list_add(actions, danger);
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="2" enumb="9">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>//
 </string>
           </argument>
         </arguments>
@@ -114,14 +140,12 @@ if (irandom(99) &lt; 50) {
 state = next_state;
 state_time++
 
+effect = next_effect;
+
 // Event follow casualty
 if (instance_exists(event)) {
     event.x = x;
     event.y = y;
-}
-
-if (my_health &lt; 3) {
-    effect = 'sick';
 }
 </string>
           </argument>
@@ -266,9 +290,81 @@ if(state == "shop") {
         <arguments>
           <argument>
             <kind>1</kind>
+            <string>/// HEAL
+if (state == 'heal') {
+    if (my_health == 5) {
+        is_seeking_help = false
+        next_state = 'idle'
+        next_effect = "default"
+    }
+    if ((is_seeking_help &amp;&amp; alarm[0] &lt; 1)) {
+        var closest = s_find_nearest_service("ambo");
+        if (distance_to_object(closest) &gt; 15) is_seeking_help = false // resets movement if dude moves away
+        else {
+            alarm[0] = 3 * room_speed;
+            event = instance_create(x, y, o_event);
+            event.sprite_index = spr_healing;
+            state_timer = 0;
+        }
+    } else if (is_seeking_help &amp;&amp; state_timer &gt; 5 * room_speed) {
+        next_state = 'idle'
+    }
+    if (next_state != 'heal') state_timer = 0;
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// EFFECT:DEFAULT
+if (effect == 'default' &amp;&amp; alarm[9] &lt; 0) {
+    alarm[9] = wait_for_effect;
+    
+    if (my_health &lt; 3) {
+        next_effect = 'sick';
+    }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
             <string>///EFFECT:SICK
 
 if (effect == 'sick') {
+    // Continuous effects
+    
     // make others sick
     for(idx = 0; idx &lt; instance_number(o_casualty); idx++) {
         near_by = instance_find(o_casualty, idx);
@@ -285,17 +381,22 @@ if (effect == 'sick') {
         }
     }
 
-    // find help
-    if (! is_seeking_help) {
-        found_ambo = false;
-        for(idx = 0; idx &lt; instance_number(o_service); idx++) {
-            service = instance_find(o_service, idx);
-            if (service.sprite_index == spr_player) { // find an ambulance officer
-                if (distance_to_object(service) &lt;= 60) {
-                    go_to = service;
-                    next_state = 'idle';
-                    is_seeking_help = true;
-                    found_ambo = true
+    // Event changes and processing
+    if(alarm[9] &lt; 0) {
+        alarm[9] = wait_for_effect;
+    
+        // find help
+        if (! is_seeking_help) {
+            found_ambo = false;
+            for(idx = 0; idx &lt; instance_number(o_service); idx++) {
+                service = instance_find(o_service, idx);
+                if (service.sprite_index == spr_player) { // find an ambulance officer
+                    if (distance_to_object(service) &lt;= 60) {
+                        go_to = service;
+                        next_state = 'idle';
+                        is_seeking_help = true;
+                        found_ambo = true
+                    }
                 }
             }
         }
@@ -321,28 +422,10 @@ if (effect == 'sick') {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// HEAL
-if (state == 'heal') {
-    if (my_health == 5) {
-        is_seeking_help = false
-        next_state = 'idle'
-        effect = "default"
-    }
-    if ((is_seeking_help &amp;&amp; alarm[0] &lt; 1)) {
-        var closest = s_find_nearest_service("ambo");
-        if (distance_to_object(closest) &gt; 15) is_seeking_help = false // resets movement if dude moves away
-        else {
-            alarm[0] = 3 * room_speed;
-            event = instance_create(x, y, o_event);
-            event.sprite_index = spr_healing;
-            state_timer = 0;
-        }
-    } else if (is_seeking_help &amp;&amp; state_timer &gt; 5 * room_speed) {
-        next_state = 'idle'
-    }
-    if (next_state != 'heal') state_timer = 0;
+            <string>/// EFFECT:ANGRY
+if (effect == 'angry' &amp;&amp; alarm[9] &lt; 0) {
+    alarm[9] = wait_for_effect;
 }
-
 </string>
           </argument>
         </arguments>
