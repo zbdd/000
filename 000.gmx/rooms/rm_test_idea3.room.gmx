@@ -58,7 +58,7 @@ s_mission_idea3(global.control)</code>
     <instance objName="o_service_start" x="256" y="320" name="inst_785B8910" locked="0" code="" scaleX="3.5" scaleY="2" colour="4294967295" rotation="0"/>
     <instance objName="o_carpark" x="256" y="352" name="inst_D8FD3C55" locked="0" code="" scaleX="3.5" scaleY="2" colour="4294967295" rotation="0"/>
     <instance objName="o_casualty_start" x="96" y="32" name="inst_B8336AF6" locked="0" code="" scaleX="0.5" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="o_casualty_end" x="672" y="320" name="inst_2D5AA5A9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="o_casualty_end" x="661" y="412" name="inst_2D5AA5A9" locked="0" code="" scaleX="3.6875" scaleY="3.90625" colour="4294967295" rotation="0"/>
     <instance objName="o_mouse" x="134" y="209" name="inst_15C31A19" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="o_wall" x="-5" y="104" name="inst_AEBE4079" locked="0" code="" scaleX="49.75" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="o_wall" x="-1" y="6" name="inst_5FA81BB6" locked="0" code="" scaleX="135.75" scaleY="1.25" colour="4294967295" rotation="0"/>

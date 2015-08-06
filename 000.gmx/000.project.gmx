@@ -22,6 +22,7 @@
       <sprite>sprites\spr_box</sprite>
       <sprite>sprites\spr_spotted</sprite>
       <sprite>sprites\spr_spot</sprite>
+      <sprite>sprites\spr_debug</sprite>
     </sprites>
     <sprites name="WARN">
       <sprite>sprites\spr_w_psych</sprite>
@@ -110,6 +111,7 @@
       <object>objects\o_b_look</object>
       <object>objects\o_b_ses</object>
       <object>objects\o_b_police</object>
+      <object>objects\o_debug</object>
     </objects>
     <objects name="DANGER">
       <object>objects\o_danger</object>

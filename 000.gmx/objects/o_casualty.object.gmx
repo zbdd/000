@@ -176,14 +176,16 @@ if (state == 'idle') {
        go_to = o_casualty_end
     }
     if (go_to != noone) {
-        next_state = 'move'
-        
         // Create a valid path
-        go_to = s_find_nearest_spot(go_to)
-        mp_grid_path(global.path.grid, path, x, y, go_to.x, go_to.y, true)
-        py = y
-        px = x
-        path_start(path, move_speed, path_action_stop, 0)
+        if (!mp_grid_path(global.path.grid, path, x, y, go_to.x, go_to.y, true)) {
+            go_to = s_find_nearest_spot(go_to, self);
+        }
+        if (go_to != noone) {
+            next_state = 'move'
+            py = y
+            px = x
+            path_start(path, move_speed, path_action_stop, 0)
+        }
         
     }
     else if (state_time &gt; (5 * room_speed)) {
@@ -214,7 +216,7 @@ if (state == 'idle') {
             <string>/// MOVE
 
 if (state == 'move') {
-    if (distance_to_object(go_to) &lt;= 1) 
+    if (distance_to_object(go_to) &lt;= 2) { 
         if (o_casualty_end == go_to) {
             ds_list_add(o_player.log, 'casualty left')
             instance_destroy()
@@ -226,7 +228,7 @@ if (state == 'move') {
             }
             go_to = noone
         }
-        
+    }
     // healing
     if (is_seeking_help &amp;&amp; alarm[0] &lt; 1) {
         next_state = 'heal'
@@ -449,6 +451,7 @@ if (effect == 'angry' &amp;&amp; alarm[9] &lt; 0) {
           <argument>
             <kind>1</kind>
             <string>s_take_life(self)
+global.anyaction = true
 </string>
           </argument>
         </arguments>
@@ -472,17 +475,19 @@ if (effect == 'angry' &amp;&amp; alarm[9] &lt; 0) {
           <argument>
             <kind>1</kind>
             <string>draw_self()
-draw_set_font(f_drabcde)
-draw_set_colour(c_red)
-draw_text(x - sprite_width, y - sprite_height, state + ":" + string(effect))
-if (path != noone &amp;&amp; global.debug) {
+if (global.debug) {
+    draw_set_font(f_drabcde)
     draw_set_colour(c_red)
-    draw_path(path, px, py, false);
-}
-if (selected) {
-    for (idx = 0; idx &lt; ds_list_size(problems); idx++) {
-        problem_to_draw = "spr_w_" + string(problems[| idx])
-        draw_sprite(s_find_sprite(problems[| idx]), 0, x + (10 * idx), y - 50)
+    draw_text(x - sprite_width, y - sprite_height, state + ":" + string(effect))
+    if (path != noone) {
+        draw_set_colour(c_red)
+        draw_path(path, px, py, false);
+    }
+    if (selected) {
+        for (idx = 0; idx &lt; ds_list_size(problems); idx++) {
+            problem_to_draw = "spr_w_" + string(problems[| idx])
+            draw_sprite(s_find_sprite(problems[| idx]), 0, x + (10 * idx), y - 50)
+        }
     }
 }
 /*if (effect == 'sick') {

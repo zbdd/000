@@ -32,8 +32,11 @@ vehicle = noone
 path = path_add()
 move_speed = 1
 state = 'idle'
+next_state = state;
 image_speed = 0
 parent = o_casualty;
+py = y
+px = x
 </string>
           </argument>
         </arguments>
@@ -61,10 +64,15 @@ depth = y * -1
 
 if (state == 'idle') {
     if (go_to != noone) {
-        state = 'move'
-        go_to = s_find_nearest_spot(go_to)
-        mp_grid_path(global.path.grid, path, x, y, go_to.x, go_to.y, true)
-        path_start(path,move_speed,path_action_stop,false)
+        go_to = s_find_nearest_spot(go_to, self)
+        if (instance_exists(go_to)) {
+            next_state = 'move'
+            py = y
+            px = x
+            mp_grid_path(global.path.grid, path, x, y, go_to.x, go_to.y, true)
+            path_start(path,move_speed,path_action_stop,false)
+            go_to = noone
+        }
     }
 }
 </string>
@@ -90,7 +98,56 @@ if (state == 'idle') {
             <string>/// MOVE
 
 if (state == 'move') { 
-    if (speed = 0) state = 'idle'
+    if (path_position == 1) next_state = 'idle'
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// THINKING
+state = next_state;
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="8" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>draw_self()
+if (path != noone &amp;&amp; global.debug) {
+    draw_set_colour(c_green)
+    draw_path(path, px, py, false);
 }
 </string>
           </argument>

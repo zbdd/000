@@ -81,7 +81,8 @@ parent = o_casualty;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (! selected) selected = true
+            <string>global.anyaction = true
+if (! selected) selected = true
 else {
     selected = false;
     var service = s_call_service("ambo");
