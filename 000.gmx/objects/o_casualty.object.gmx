@@ -87,10 +87,7 @@ if (irandom(99) &lt; 50) {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>my_health = 5
-is_seeking_help = false
-next_state = 'idle'
-effect = "default"
+            <string>my_health++
 </string>
           </argument>
         </arguments>
@@ -148,7 +145,7 @@ if (my_health &lt; 3) {
             <kind>1</kind>
             <string>/// IDLE
 depth = y * -1;
-life--
+//life--
 
 if (state == 'idle') {
     if (life &lt; 0) {
@@ -199,9 +196,17 @@ if (state == 'move') {
             instance_destroy()
         }
         else {
-            if (object_get_name(go_to.parent.object_index) == "o_store") next_state = "shop"
+            var parent = object_get_parent(go_to);
+            if (parent != noone) {
+                if (object_get_name(parent.object_index) == "o_store") next_state = "shop"
+            }
             go_to = noone
         }
+        
+    // healing
+    if (is_seeking_help &amp;&amp; alarm[0] &lt; 1) {
+        next_state = 'heal'
+    }
     
     if (go_to == noone &amp;&amp; next_state == "move") {
         next_state = 'idle'   
@@ -280,13 +285,6 @@ if (effect == 'sick') {
         }
     }
 
-    // healing
-    if (is_seeking_help &amp;&amp; alarm[0] &lt; 0 &amp;&amp; state != 'move') {
-        alarm[0] = 3 * room_speed;
-        event = instance_create(x, y, o_event);
-        event.sprite_index = spr_healing;
-    }
-
     // find help
     if (! is_seeking_help) {
         found_ambo = false;
@@ -303,6 +301,48 @@ if (effect == 'sick') {
         }
     }
 }
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// HEAL
+if (state == 'heal') {
+    if (my_health == 5) {
+        is_seeking_help = false
+        next_state = 'idle'
+        effect = "default"
+    }
+    if ((is_seeking_help &amp;&amp; alarm[0] &lt; 1)) {
+        var closest = s_find_nearest_service("ambo");
+        if (distance_to_object(closest) &gt; 15) is_seeking_help = false // resets movement if dude moves away
+        else {
+            alarm[0] = 3 * room_speed;
+            event = instance_create(x, y, o_event);
+            event.sprite_index = spr_healing;
+            state_timer = 0;
+        }
+    } else if (is_seeking_help &amp;&amp; state_timer &gt; 5 * room_speed) {
+        next_state = 'idle'
+    }
+    if (next_state != 'heal') state_timer = 0;
+}
+
 </string>
           </argument>
         </arguments>

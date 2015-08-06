@@ -68,6 +68,7 @@
     <script>scripts\s_police_done.gml</script>
     <script>scripts\s_find_nearest_spot.gml</script>
     <script>scripts\s_take_life.gml</script>
+    <script>scripts\s_find_nearest_service.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_drabcde</font>
