@@ -475,7 +475,7 @@ if (effect == 'angry' &amp;&amp; alarm[9] &lt; 0) {
 draw_set_font(f_drabcde)
 draw_set_colour(c_red)
 draw_text(x - sprite_width, y - sprite_height, state + ":" + string(effect))
-if (path != noone) {
+if (path != noone &amp;&amp; global.debug) {
     draw_set_colour(c_red)
     draw_path(path, px, py, false);
 }
@@ -489,6 +489,7 @@ if (selected) {
     draw_set_color(c_green)
     draw_circle(x, y, global.control.sick_radius, true);
 }*/
+
 </string>
           </argument>
         </arguments>

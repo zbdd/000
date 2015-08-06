@@ -6,13 +6,13 @@ var player = instance_create(
 
 if (!instance_exists(control.objects)) ds_list_add(control.objects, player)
 else player = instance_find(o_player, instance_number(o_player)-1)
-    
+  
 var spawner = instance_create(x, y, o_casualty_spawner)
 
-instance_create(256, 128, o_store)
+/*instance_create(256, 128, o_store)
 instance_create(416, 160, o_store)
 instance_create(320, 224, o_store)
 instance_create(480, 256, o_store)
-instance_create(320, 320, o_fap)
+instance_create(320, 320, o_fap)*/
 
 instance_create(x, y, o_sick_controller);

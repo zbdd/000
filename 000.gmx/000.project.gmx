@@ -87,6 +87,7 @@
     <objects name="PLAYER">
       <object>objects\o_player</object>
       <object>objects\o_hud</object>
+      <object>objects\o_mouse</object>
     </objects>
     <objects name="NPC">
       <object>objects\o_casualty</object>
