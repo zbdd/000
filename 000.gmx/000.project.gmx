@@ -18,6 +18,10 @@
       <sprite>sprites\spr_b_ses</sprite>
       <sprite>sprites\spr_b_check</sprite>
       <sprite>sprites\spr_b_look</sprite>
+      <sprite>sprites\spr_tick</sprite>
+      <sprite>sprites\spr_box</sprite>
+      <sprite>sprites\spr_spotted</sprite>
+      <sprite>sprites\spr_spot</sprite>
     </sprites>
     <sprites name="WARN">
       <sprite>sprites\spr_w_psych</sprite>
@@ -31,22 +35,21 @@
       <sprite>sprites\spr_sick</sprite>
       <sprite>sprites\spr_healing</sprite>
     </sprites>
-    <sprite>sprites\spr_tick</sprite>
-    <sprite>sprites\spr_box</sprite>
     <sprites name="SERVICE">
       <sprite>sprites\spr_police</sprite>
       <sprite>sprites\spr_elec</sprite>
       <sprite>sprites\spr_ses</sprite>
       <sprite>sprites\spr_police_wagon</sprite>
     </sprites>
-    <sprite>sprites\spr_spotted</sprite>
-    <sprite>sprites\spr_spot</sprite>
-    <sprite>sprites\spr_service_start</sprite>
-    <sprite>sprites\spr_casualty_start</sprite>
-    <sprite>sprites\spr_carpark</sprite>
     <sprites name="STORE">
       <sprite>sprites\spr_store</sprite>
       <sprite>sprites\spr_fap</sprite>
+    </sprites>
+    <sprites name="WORLD">
+      <sprite>sprites\spr_casualty_start</sprite>
+      <sprite>sprites\spr_carpark</sprite>
+      <sprite>sprites\spr_service_start</sprite>
+      <sprite>sprites\spr_wall</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background"/>
@@ -121,6 +124,9 @@
     <objects name="STORE">
       <object>objects\o_fap</object>
       <object>objects\o_store</object>
+    </objects>
+    <objects name="WORLD">
+      <object>objects\o_wall</object>
     </objects>
   </objects>
   <rooms name="rooms">
