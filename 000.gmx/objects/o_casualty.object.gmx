@@ -307,12 +307,12 @@ if (state == 'heal') {
             alarm[0] = 3 * room_speed;
             event = instance_create(x, y, o_event);
             event.sprite_index = spr_healing;
-            state_timer = 0;
+            state_time = 0;
         }
-    } else if (is_seeking_help &amp;&amp; state_timer &gt; 5 * room_speed) {
+    } else if (state_time &gt; 5 * room_speed) {
         next_state = 'idle'
     }
-    if (next_state != 'heal') state_timer = 0;
+    if (next_state != 'heal') state_time = 0;
 }
 
 </string>

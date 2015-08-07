@@ -58,9 +58,9 @@ m1 = instance_create(x + view_wview - 60, view_yview + 20, o_fa)
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>x = view_xview[0] + 10
-y = view_yview[0] + 10
-debug.x = x
+            <string>//x = view_xview
+//y = view_yview
+debug.x = view_xview
 debug.y = view_hview - 74
 close.x = x + 60
 close.y = y + 80
@@ -98,8 +98,6 @@ else {draw_seconds=string(seconds)}
           <argument>
             <kind>1</kind>
             <string>/// Draw GUI
-x = view_xview[0] + 20
-y = view_yview[0] + 20
 draw_set_colour(c_red)
 draw_set_font(f_drabcde)
 draw_text(x, y, "Time: " + draw_minutes + "m : " + draw_seconds + "s") // Draw time with a colon as a separator
@@ -118,18 +116,15 @@ if (instance_exists(global.control)) {
 
     // draw the current budget
     draw_text(x, y + 40, "Budget: " + string(global.control.budget));
+    draw_text(view_wview[0] + 250, y + 20, "Services")
 }
 // debug purposes, show what the user has done
 for (idx = 0; idx &lt; ds_list_size(o_player.log) &amp;&amp; idx &lt; 5; idx++) {
     draw_set_colour(c_red)
     draw_set_font(f_drabcde_small)
-    draw_text(x,y + 60, 'Action log:')
+    draw_text(x, y + 60, 'Action log:')
     draw_text(x, y + 80 + (20 * idx), o_player.log[| ds_list_size(o_player.log) - idx - 1])
 }
-
-draw_set_colour(c_red)
-draw_set_font(f_drabcde)
-draw_text(x + view_wview - 100, view_yview + 20, "Services")
 
 // Main task ahead progress update
 /*if (global.control.state == 'danger') {
