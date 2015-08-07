@@ -180,6 +180,7 @@ if (state == 'idle') {
         if (!mp_grid_path(global.path.grid, path, x, y, go_to.x, go_to.y, true)) {
             go_to = s_find_nearest_spot(go_to, self);
         }
+
         if (go_to != noone) {
             next_state = 'move'
             py = y

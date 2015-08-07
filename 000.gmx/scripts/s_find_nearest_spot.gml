@@ -41,5 +41,5 @@ do {
     go_to = argument0
     attempt++;
     if (attempt > force_break) return noone
-} until (!mp_grid_path(global.path.grid, mover.path, x, y, go_to.x, go_to.y, true))
+} until (mp_grid_path(global.path.grid, mover.path, x, y, go_to.x, go_to.y, true))
 return go_to
