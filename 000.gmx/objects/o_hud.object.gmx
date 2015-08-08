@@ -61,7 +61,7 @@ m1 = instance_create(x + view_wview - 60, view_yview + 20, o_fa)
             <string>//x = view_xview
 //y = view_yview
 debug.x = view_xview
-debug.y = view_hview - 74
+debug.y = view_yview + view_hview - 74
 close.x = x + 60
 close.y = y + 80
 
@@ -100,7 +100,7 @@ else {draw_seconds=string(seconds)}
             <string>/// Draw GUI
 draw_set_colour(c_red)
 draw_set_font(f_drabcde)
-draw_text(x, y, "Time: " + draw_minutes + "m : " + draw_seconds + "s") // Draw time with a colon as a separator
+draw_text(x, y + 20, "Time: " + draw_minutes + "m : " + draw_seconds + "s") // Draw time with a colon as a separator
 
 // if calling services, show progress
 if (instance_exists(global.control)) {
@@ -115,15 +115,33 @@ if (instance_exists(global.control)) {
     }
 
     // draw the current budget
-    draw_text(x, y + 40, "Budget: " + string(global.control.budget));
+    draw_text(x, y + 60, "Budget: " + string(global.control.budget));
     draw_text(view_wview[0] + 250, y + 20, "Services")
+    
+    
+    // stats
+    // visitors
+    draw_text(x + 250, view_hview + 200, "Visitors:");
+    draw_set_color(c_black)
+    draw_rectangle(x + 340, view_hview + 200, x + 440, view_hview + 220, false);
+    draw_set_colour(c_red)
+    draw_rectangle(x + 340, view_hview + 200, x + 340 + ((instance_number(o_casualty)/global.control.max_casualties) * 100), view_hview + 220, false);
+
+    // sick
+    draw_set_color(c_red)
+    draw_text(x + 250, view_hview + 240, "Unwell:");
+    draw_set_color(c_black)
+    draw_rectangle(x + 340, view_hview + 240, x + 440, view_hview + 260, false);
+    draw_set_colour(c_red)
+    draw_rectangle(x + 340, view_hview + 240, x + 340 + ((s_count_sick()/global.control.max_casualties) * 100), view_hview + 260, false);
+    
 }
 // debug purposes, show what the user has done
 for (idx = 0; idx &lt; ds_list_size(o_player.log) &amp;&amp; idx &lt; 5; idx++) {
     draw_set_colour(c_red)
     draw_set_font(f_drabcde_small)
-    draw_text(x, y + 60, 'Action log:')
-    draw_text(x, y + 80 + (20 * idx), o_player.log[| ds_list_size(o_player.log) - idx - 1])
+    draw_text(x, y + 80, 'Action log:')
+    draw_text(x, y + 100 + (20 * idx), o_player.log[| ds_list_size(o_player.log) - idx - 1])
 }
 
 // Main task ahead progress update

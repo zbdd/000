@@ -25,7 +25,9 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>name = 'casualty';
+            <string>px = x
+py = y
+name = 'casualty';
 text = 'is default text'
 debug = false;
 danger = noone
