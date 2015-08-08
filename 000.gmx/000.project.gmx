@@ -74,6 +74,8 @@
     <script>scripts\s_take_life.gml</script>
     <script>scripts\s_find_nearest_service.gml</script>
     <script>scripts\s_count_sick.gml</script>
+    <script>scripts\s_find_nearest_store.gml</script>
+    <script>scripts\s_find_nearest_help.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_drabcde</font>

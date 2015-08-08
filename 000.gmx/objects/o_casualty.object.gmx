@@ -303,7 +303,7 @@ if (state == 'heal') {
         next_effect = "default"
     }
     if ((is_seeking_help &amp;&amp; alarm[0] &lt; 1)) {
-        var closest = s_find_nearest_service("ambo");
+        var closest = s_find_nearest_help(self)
         if (distance_to_object(closest) &gt; 15) is_seeking_help = false // resets movement if dude moves away
         else {
             alarm[0] = 3 * room_speed;
@@ -392,17 +392,11 @@ if (effect == 'sick') {
     
         // find help
         if (! is_seeking_help) {
-            found_ambo = false;
-            for(idx = 0; idx &lt; instance_number(o_service); idx++) {
-                service = instance_find(o_service, idx);
-                if (service.sprite_index == spr_player) { // find an ambulance officer
-                    if (distance_to_object(service) &lt;= 60) {
-                        go_to = service;
-                        next_state = 'idle';
-                        is_seeking_help = true;
-                        found_ambo = true
-                    }
-                }
+            help = s_find_nearest_help(self)
+            if (distance_to_object(help) &lt;= 60) {
+                go_to = help;
+                next_state = 'idle';
+                is_seeking_help = true;
             }
         }
     }
