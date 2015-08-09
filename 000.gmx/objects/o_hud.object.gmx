@@ -36,6 +36,7 @@ close = instance_create(x, y, o_button)
 debug = instance_create(x + 10, view_hview - 74, o_debug)
 
 m1 = instance_create(x + view_wview - 60, view_yview + 20, o_fa)
+m2 = instance_create(x + view_wview - 60, view_yview + 65, o_menu_fap)
 </string>
           </argument>
         </arguments>

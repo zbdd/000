@@ -55,9 +55,11 @@ parent = o_casualty;
             <string>if (selected) {
     x = mouse_x
     y = mouse_y
+    image_index = 0
 } else {
     x = view_xview + view_wview - 60
-    y = view_yview + 60
+    y = view_yview + 50
+    image_index = 1
 }
 </string>
           </argument>
@@ -83,13 +85,13 @@ parent = o_casualty;
             <kind>1</kind>
             <string>global.anyaction = true
 if (! selected) selected = true
-else {
+else if (selected &amp;&amp; place_meeting(mouse_x, mouse_y, o_can_place)) {
     selected = false;
     var service = s_call_service("ambo");
     var waypoint = instance_create(mouse_x, mouse_y, o_waypoint);
 
     service.go_to = waypoint;
-}
+} else selected = false
 </string>
           </argument>
         </arguments>
@@ -116,6 +118,10 @@ else {
 if (selected) {
     draw_set_colour(c_green)
     draw_circle(x, y, 60, true)
+    if(! place_meeting(mouse_x, mouse_y, o_can_place)) image_blend = c_red
+    else image_blend = c_white
+} else {
+    image_blend = c_white
 }
 </string>
           </argument>
