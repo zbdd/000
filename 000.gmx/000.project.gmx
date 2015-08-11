@@ -35,6 +35,7 @@
       <sprite>sprites\spr_shopping</sprite>
       <sprite>sprites\spr_sick</sprite>
       <sprite>sprites\spr_healing</sprite>
+      <sprite>sprites\spr_info_box</sprite>
     </sprites>
     <sprites name="SERVICE">
       <sprite>sprites\spr_police</sprite>
@@ -77,6 +78,7 @@
     <script>scripts\s_count_sick.gml</script>
     <script>scripts\s_find_nearest_store.gml</script>
     <script>scripts\s_find_nearest_help.gml</script>
+    <script>scripts\s_create_info_box.gml</script>
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_drabcde</font>
@@ -98,6 +100,7 @@
       <object>objects\o_casualty</object>
       <object>objects\o_service</object>
       <object>objects\o_vehicle</object>
+      <object>objects\o_info_box</object>
       <objects name="EVENTS">
         <object>objects\o_event</object>
       </objects>
