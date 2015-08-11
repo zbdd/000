@@ -2,10 +2,11 @@ go_to = argument0
 mover = argument1
 attempt = 0;
 radius = 10
-force_break = 50
+force_break = 5 * room_speed; // try for 5 seconds
+
 do {
     tmp_waypoint = ds_list_create()
-    for(ida = 0; ida < 361; ida+=min(45, irandom(90))) {
+    for(ida = 0; ida < 361; ida+=10) {
         cx = go_to.x + (attempt * 10) + radius * cos(ida * pi / 180);
         cy = go_to.y + (attempt * 10) + radius * sin(ida * pi / 180);
         var waypoint = instance_create(cx,cy,o_waypoint);

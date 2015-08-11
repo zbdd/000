@@ -171,7 +171,7 @@ if (instance_exists(event)) {
             <kind>1</kind>
             <string>/// IDLE
 depth = y * -1;
-life-- // actualy determines when they leave, not their health
+life-- // actually determines when they leave, not their health
 
 if (state == 'idle') {
     if (life &lt; 0) {
@@ -191,7 +191,7 @@ if (state == 'idle') {
         }
         
     }
-    else if (state_time &gt; (5 * room_speed)) {
+    if (state_time &gt; (5 * room_speed) &amp;&amp; next_state != 'move') {
         go_to = instance_find(o_store, random(instance_number(o_store)))
     }
     if (next_state != 'idle') state_time = 0
