@@ -16,3 +16,4 @@ instance_create(480, 256, o_store)
 instance_create(320, 320, o_fap)*/
 
 instance_create(x, y, o_sick_controller);
+global.debug = false
