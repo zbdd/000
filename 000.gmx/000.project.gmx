@@ -36,6 +36,7 @@
       <sprite>sprites\spr_sick</sprite>
       <sprite>sprites\spr_healing</sprite>
       <sprite>sprites\spr_info_box</sprite>
+      <sprite>sprites\spr_info_box_sick_icon</sprite>
     </sprites>
     <sprites name="SERVICE">
       <sprite>sprites\spr_police</sprite>
