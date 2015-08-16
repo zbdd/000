@@ -31,6 +31,38 @@ effect = 'effect'
 state = 'state'
 mugshot = spr_player
 mugshot_extra = 0
+casualty = noone
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>if (casualty != noone) {
+    name = casualty.name;
+    my_health = casualty.my_health;
+    state = casualty.state;
+    effect = casualty.effect;
+    // TODO fix this
+    mugshot = casualty.sprite_index;
+    mugshot_extra = casualty.image_index;
+}
 </string>
           </argument>
         </arguments>

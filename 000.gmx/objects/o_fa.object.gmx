@@ -108,10 +108,10 @@ parent = o_casualty;
             <kind>1</kind>
             <string>global.anyaction = true
 if (! selected) selected = true
-else if (selected &amp;&amp; place_meeting(mouse_x, mouse_y, o_can_place) &amp;&amp; place_free(mouse_x, mouse_y)) {
+else if (selected &amp;&amp; place_meeting(x, y, o_can_place) &amp;&amp; place_free(x, y)) {
     selected = false;
     var service = s_call_service("ambo");
-    var waypoint = instance_create(mouse_x, mouse_y, o_waypoint);
+    var waypoint = instance_create(x, y, o_waypoint);
 
     service.go_to = waypoint;
 } else selected = false

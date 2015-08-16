@@ -544,6 +544,9 @@ if (global.debug) {
         }
     }
 }
+
+image_blend = c_white;
+
 /*if (effect == 'sick') {
     draw_set_color(c_green)
     draw_circle(x, y, global.control.sick_radius, true);

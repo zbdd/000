@@ -53,12 +53,12 @@ parent = o_casualty;
           <argument>
             <kind>1</kind>
             <string>if (selected) {
-    x = mouse_x
-    y = mouse_y
+    x = mouse_x - 16
+    y = mouse_y - 16
     image_index = 2
 } else {
-    x = view_xview + view_wview - 60
-    y = view_yview + 90
+    x = view_xview + view_wview - 76
+    y = view_yview + 80
     image_index = 1
 }
 </string>
@@ -109,10 +109,10 @@ parent = o_casualty;
             <string>global.anyaction = true
 
 if (! selected) selected = true
-else if (selected &amp;&amp; place_meeting(mouse_x, mouse_y, o_can_place) 
-    &amp;&amp; place_free(mouse_x, mouse_y)) {
+else if (selected &amp;&amp; place_meeting(x, y, o_can_place) 
+    &amp;&amp; place_free(x, y)) {
     selected = false;
-    instance_create(mouse_x, mouse_y, o_fap);
+    instance_create(x, y, o_fap);
 } else selected = false
 </string>
           </argument>
