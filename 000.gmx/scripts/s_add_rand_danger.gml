@@ -28,7 +28,6 @@ danger_type = irandom(ds_grid_width(type) - 1)
 danger.text = type[# danger_type, irandom_range(1, ds_grid_height(type) - 1)]
 danger.type = type[# danger_type, 0]
 
-show_debug_message(danger.type)
 if (danger.type == 'env') show_debug_message(danger.text)
 
 return danger

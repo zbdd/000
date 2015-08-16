@@ -26,8 +26,12 @@
           <argument>
             <kind>1</kind>
             <string>depth = y * -1
+image_speed = 0
 alarm[0] = 1
 parent = o_store
+name = "store"
+box = noone
+description = "a common store#to buy things"
 </string>
           </argument>
         </arguments>

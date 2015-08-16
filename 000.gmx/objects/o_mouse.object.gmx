@@ -48,7 +48,31 @@
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>if (mouse_check_button_pressed(mb_left) &amp;&amp; ! global.anyaction) {
+            <string>if (mouse_check_button_pressed(mb_right)) {
+    global.anyaction = true;
+    
+    store = noone;
+    store = instance_position(mouse_x, mouse_y, o_store);
+    for(idx = 0; idx &lt; instance_number(o_store_box); idx++) {
+        with (instance_find(o_store_box, idx)) { instance_destroy(); }
+    }
+    for(idx = 0; idx &lt; instance_number(o_info_box); idx++) {
+            with (instance_find(o_info_box, idx)) { instance_destroy(); }
+        }
+    if (store == noone) store = instance_position(mouse_x, mouse_y, o_fap);
+    if (store != noone) {
+        store.box = s_create_store_box(store);
+    }
+    
+    casualty = noone
+    casualty = instance_position(mouse_x, mouse_y, o_casualty);
+    if (casualty != noone) {
+        casualty.box = s_create_info_box(casualty);
+    }
+}
+
+
+if (mouse_check_button_pressed(mb_left) &amp;&amp; ! global.anyaction) {
     x = mouse_x
     y = mouse_y
 }

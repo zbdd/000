@@ -94,6 +94,7 @@ if (irandom(99) &lt; 50) {
           <argument>
             <kind>1</kind>
             <string>if (instance_exists(box)) with (box) { instance_destroy(); }
+if (effect == 'sick') global.control.untreated++
 </string>
           </argument>
         </arguments>
@@ -210,6 +211,8 @@ if (state == 'idle') {
         // Create a valid path
         if (!mp_grid_path(global.path.grid, path, x, y, go_to.x, go_to.y, true)) {
             go_to = s_find_nearest_spot(go_to, self);
+        } else {
+            next_state = 'stuck'
         }
 
         if (go_to != noone) {
@@ -303,6 +306,31 @@ if(state == "shop") {
         with (event) { instance_destroy(); }
         event = noone;
     }
+}
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// STUCK
+if (state == 'stuck') {
+    show_debug_message("asdas")
+    if (state_time &gt; 3 * room_speed) next_state = 'idle';
 }
 </string>
           </argument>
@@ -453,31 +481,6 @@ if (effect == 'sick') {
             <string>/// EFFECT:ANGRY
 if (effect == 'angry' &amp;&amp; alarm[9] &lt; 0) {
     alarm[9] = wait_for_effect;
-}
-</string>
-          </argument>
-        </arguments>
-      </action>
-    </event>
-    <event eventtype="6" enumb="5">
-      <action>
-        <libid>1</libid>
-        <id>603</id>
-        <kind>7</kind>
-        <userelative>0</userelative>
-        <isquestion>0</isquestion>
-        <useapplyto>-1</useapplyto>
-        <exetype>2</exetype>
-        <functionname></functionname>
-        <codestring></codestring>
-        <whoName>self</whoName>
-        <relative>0</relative>
-        <isnot>0</isnot>
-        <arguments>
-          <argument>
-            <kind>1</kind>
-            <string>if (! instance_exists(box)) {
-    box = s_create_info_box(self);
 }
 </string>
           </argument>

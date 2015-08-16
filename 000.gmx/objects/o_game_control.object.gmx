@@ -40,6 +40,7 @@ timer = TIMER_MAX
 state = 'danger'
 dangers = 0
 max_casualties = 10;
+untreated = 0;
 
 // CONSTANTS
 sick_radius = 20

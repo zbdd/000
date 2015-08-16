@@ -2,7 +2,7 @@ go_to = argument0
 mover = argument1
 attempt = 0;
 radius = 10
-force_break = 5 * room_speed; // try for 5 seconds
+force_break = 3;
 
 do {
     tmp_waypoint = ds_list_create()

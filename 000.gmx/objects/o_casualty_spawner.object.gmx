@@ -59,14 +59,17 @@ else alarm[0] = spawn_rate
             <string>if (continuous) alarm[0] = spawn_rate
 if (global.control.max_casualties &lt;= instance_number(o_casualty)) return noone;
 
-x = max(o_casualty_start.x, irandom(x + spawn_region.sprite_width))
-y = max(o_casualty_start.y, irandom(y + spawn_region.sprite_height))
+do {
+    x = max(o_casualty_start.x, o_casualty_start.x + irandom(spawn_region.sprite_width))
+    y = max(o_casualty_start.y, o_casualty_start.y + irandom(spawn_region.sprite_height))
+} until (place_free(x, y));
 
 var casualty = s_create_casualty(
                 x, 
                 y,
                 'casualty_' + string(spawn + 1),
                 'default description');
+
 
 //casualty.go_to = instance_find(o_store, random(instance_number(o_store)))
 
