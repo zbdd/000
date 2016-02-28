@@ -39,7 +39,7 @@ TIMER_MAX = 3 * room_speed;
 timer = TIMER_MAX
 state = 'danger'
 dangers = 0
-max_casualties = 10;
+max_casualties = 1;
 untreated = 0;
 
 // CONSTANTS

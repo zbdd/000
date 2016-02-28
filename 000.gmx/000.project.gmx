@@ -47,6 +47,7 @@
     <sprites name="STORE">
       <sprite>sprites\spr_store</sprite>
       <sprite>sprites\spr_fap</sprite>
+      <sprite>sprites\spr_door</sprite>
     </sprites>
     <sprites name="WORLD">
       <sprite>sprites\spr_casualty_start</sprite>
@@ -59,12 +60,6 @@
   <backgrounds name="background"/>
   <paths name="paths"/>
   <scripts name="scripts">
-    <script>scripts\s_mission_test.gml</script>
-    <script>scripts\s_mission_level_one.gml</script>
-    <script>scripts\s_mission_idea2.gml</script>
-    <script>scripts\s_mission_idea3.gml</script>
-    <script>scripts\s_create_menu.gml</script>
-    <script>scripts\s_create_player_menu.gml</script>
     <script>scripts\s_string_extract.gml</script>
     <script>scripts\s_create_casualty.gml</script>
     <script>scripts\s_add_danger.gml</script>
@@ -81,6 +76,17 @@
     <script>scripts\s_find_nearest_help.gml</script>
     <script>scripts\s_create_info_box.gml</script>
     <script>scripts\s_create_store_box.gml</script>
+    <scripts name="Missions">
+      <script>scripts\s_mission_level_one.gml</script>
+      <script>scripts\s_mission_test.gml</script>
+      <script>scripts\s_mission_idea2.gml</script>
+      <script>scripts\s_mission_idea3.gml</script>
+      <script>scripts\s_mission_idea4.gml</script>
+    </scripts>
+    <scripts name="Menus">
+      <script>scripts\s_create_player_menu.gml</script>
+      <script>scripts\s_create_menu.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_drabcde</font>
@@ -138,6 +144,7 @@
     </objects>
     <objects name="STORE">
       <object>objects\o_fap</object>
+      <object>objects\o_door</object>
       <object>objects\o_store</object>
     </objects>
     <objects name="WORLD">
@@ -145,6 +152,7 @@
     </objects>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_test_idea4</room>
     <room>rooms\rm_test_idea3</room>
     <room>rooms\rm_test_idea2</room>
     <room>rooms\rm_level_one</room>

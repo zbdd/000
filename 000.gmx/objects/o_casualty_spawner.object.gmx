@@ -26,7 +26,6 @@
           <argument>
             <kind>1</kind>
             <string>where = noone
-max_spawn = 5
 spawn = 0
 continuous = true
 no_delay = true

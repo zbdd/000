@@ -39,7 +39,6 @@ analysis = instance_create(x, y, o_analysis)
 path = path_add()
 menu_items = ds_list_create()
 state_time = 0;
-state_count = 0;
 tmp_waypoint = ds_list_create()
 life = max(15 * room_speed, irandom(60) * room_speed)
 event = noone
@@ -165,9 +164,6 @@ if (effect == 'sick') global.control.untreated++
           <argument>
             <kind>1</kind>
             <string>/// THINKING
-if (state == next_state) state_count++;
-else state_count = 0;
-
 state = next_state;
 state_time++
 
@@ -536,7 +532,7 @@ global.anyaction = true
 if (global.debug) {
     draw_set_font(f_drabcde)
     draw_set_colour(c_red)
-    draw_text(x - sprite_width, y - sprite_height, state + ":" + string(state_count) + ":" + string(effect))
+    draw_text(x - sprite_width, y - sprite_height, state + ":" + string(state_time) + " - " + string(effect))
     if (path != noone) {
         draw_set_colour(c_red)
         draw_path(path, px, py, false);
