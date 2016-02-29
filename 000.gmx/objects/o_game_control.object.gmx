@@ -44,7 +44,7 @@ untreated = 0;
 
 // CONSTANTS
 sick_radius = 20
-sick_min_time = 3 * room_speed
+sick_min_time = 0 * room_speed
 </string>
           </argument>
         </arguments>

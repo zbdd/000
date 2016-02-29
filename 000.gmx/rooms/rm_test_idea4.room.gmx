@@ -56,12 +56,19 @@ s_mission_idea4(global.control)</code>
   </views>
   <instances>
     <instance objName="o_service_start" x="118" y="237" name="inst_AE2B9501" locked="0" code="" scaleX="0.310000002384186" scaleY="0.5625" colour="4294967295" rotation="0"/>
-    <instance objName="o_wall" x="63" y="224" name="inst_887301A2" locked="0" code="" scaleX="64" scaleY="1" colour="4294967295" rotation="0"/>
-    <instance objName="o_wall" x="64" y="347" name="inst_765AF66E" locked="0" code="" scaleX="63.5" scaleY="-1" colour="4294967295" rotation="0"/>
+    <instance objName="o_wall" x="62" y="216" name="inst_887301A2" locked="0" code="" scaleX="64" scaleY="2" colour="4294967295" rotation="0"/>
+    <instance objName="o_wall" x="62" y="357" name="inst_765AF66E" locked="0" code="" scaleX="63" scaleY="-2.75" colour="4294967295" rotation="0"/>
     <instance objName="o_wall" x="62" y="224" name="inst_BB66B5DF" locked="0" code="" scaleX="2.5" scaleY="30.6666660308838" colour="4294967295" rotation="0"/>
-    <instance objName="o_casualty_start" x="76" y="274" name="inst_DF1F0A14" locked="0" code="" scaleX="0.31746032834053" scaleY="0.5625" colour="4294967295" rotation="0"/>
-    <instance objName="o_casualty_end" x="352" y="282" name="inst_00D5DA7A" locked="0" code="" scaleX="1.6599999666214" scaleY="1.34375" colour="4294967295" rotation="0"/>
-    <instance objName="o_door" x="76" y="267" name="inst_0CDFEDB9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="o_casualty_start" x="83" y="277" name="inst_DF1F0A14" locked="0" code="" scaleX="0.31746032834053" scaleY="0.5625" colour="4294967295" rotation="0"/>
+    <instance objName="o_casualty_end" x="357" y="284" name="inst_00D5DA7A" locked="0" code="" scaleX="1.6599999666214" scaleY="1.34375" colour="4294967295" rotation="0"/>
+    <instance objName="o_door" x="75" y="268" name="inst_0CDFEDB9" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="o_store" x="186" y="229" name="inst_09BBB1B4" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="o_store" x="185" y="304" name="inst_3CDAF972" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="o_store" x="278" y="229" name="inst_94C5BF7C" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="o_store" x="275" y="305" name="inst_154CFC7E" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="o_mouse" x="170" y="293" name="inst_38973933" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="o_door" x="324" y="267" name="inst_1A9D7A13" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="o_can_place" x="82" y="234" name="inst_1B156FC0" locked="0" code="" scaleX="8.72000026702881" scaleY="3.1875" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>

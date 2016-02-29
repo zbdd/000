@@ -48,6 +48,7 @@
       <sprite>sprites\spr_store</sprite>
       <sprite>sprites\spr_fap</sprite>
       <sprite>sprites\spr_door</sprite>
+      <sprite>sprites\spr_store_defaults</sprite>
     </sprites>
     <sprites name="WORLD">
       <sprite>sprites\spr_casualty_start</sprite>
@@ -61,16 +62,11 @@
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\s_string_extract.gml</script>
-    <script>scripts\s_create_casualty.gml</script>
     <script>scripts\s_add_danger.gml</script>
     <script>scripts\s_add_rand_danger.gml</script>
-    <script>scripts\s_find_sprite.gml</script>
     <script>scripts\s_create_service.gml</script>
     <script>scripts\s_call_service.gml</script>
     <script>scripts\s_police_done.gml</script>
-    <script>scripts\s_find_nearest_spot.gml</script>
-    <script>scripts\s_take_life.gml</script>
-    <script>scripts\s_find_nearest_service.gml</script>
     <script>scripts\s_count_sick.gml</script>
     <script>scripts\s_find_nearest_store.gml</script>
     <script>scripts\s_find_nearest_help.gml</script>
@@ -87,10 +83,18 @@
       <script>scripts\s_create_player_menu.gml</script>
       <script>scripts\s_create_menu.gml</script>
     </scripts>
+    <scripts name="Casualty Scripts">
+      <script>scripts\s_find_sprite.gml</script>
+      <script>scripts\s_find_nearest_spot.gml</script>
+      <script>scripts\s_find_nearest_service.gml</script>
+      <script>scripts\s_take_life.gml</script>
+      <script>scripts\s_create_casualty.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\f_drabcde</font>
     <font>fonts\f_drabcde_small</font>
+    <font>fonts\f_info_small</font>
   </fonts>
   <objects name="objects">
     <objects name="SYSTEM">
@@ -146,6 +150,7 @@
       <object>objects\o_fap</object>
       <object>objects\o_door</object>
       <object>objects\o_store</object>
+      <object>objects\o_interact</object>
     </objects>
     <objects name="WORLD">
       <object>objects\o_wall</object>

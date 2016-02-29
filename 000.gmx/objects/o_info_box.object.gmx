@@ -31,6 +31,7 @@ effect = 'effect'
 state = 'state'
 mugshot = spr_player
 mugshot_extra = 0
+money = 0;
 casualty = noone
 </string>
           </argument>
@@ -57,6 +58,7 @@ casualty = noone
             <string>if (casualty != noone) {
     name = casualty.name;
     my_health = casualty.my_health;
+    money = casualty.money;
     state = casualty.state;
     effect = casualty.effect;
     // TODO fix this
@@ -110,12 +112,13 @@ casualty = noone
             <kind>1</kind>
             <string>depth = y * -10000
 draw_self()
-draw_set_font(f_drabcde_small)
+draw_set_font(f_info_small)
 draw_set_colour(c_red)
 draw_text(x + 5, y + 4, name);
-draw_text(x + 5, y + 24, "Health: " + string(my_health));
-draw_text(x + 5, y + 34, "Doing: " + state);
-draw_text(x + 5, y + 44, "Feeling: " + effect);
+draw_text(x + 5, y + 19, "Health: " + string(my_health));
+draw_text(x + 5, y + 29, "Doing: " + state);
+draw_text(x + 5, y + 39, "Feeling: " + effect);
+draw_text(x + 5, y + 49, "Wallet: $"+ string(money));
 draw_sprite_part_ext(mugshot, mugshot_extra,10,0,11,11,x + 92,y - 1,3,3,-1,1)
 if (effect == 'sick') {
     draw_sprite(spr_info_box_sick_icon, 0, x + 94, y + 42)

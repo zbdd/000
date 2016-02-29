@@ -42,6 +42,7 @@ state_time = 0;
 tmp_waypoint = ds_list_create()
 life = max(15 * room_speed, irandom(60) * room_speed)
 event = noone
+money = random(6);
 box = noone
 next_state = 'idle'
 my_health = 5
@@ -164,6 +165,9 @@ if (effect == 'sick') global.control.untreated++
           <argument>
             <kind>1</kind>
             <string>/// THINKING
+
+if (my_health &lt;= 0) next_state = "dead";
+
 state = next_state;
 state_time++
 
@@ -294,14 +298,30 @@ if (state == 'move') {
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// SHOP
+            <string>/// SHOP AND BROWSE
 if(state == "shop") {
     if (state_time &gt; 5 * room_speed) next_state = "idle"
-    if (event == noone &amp;&amp; state_time &gt; room_speed) {
+    if (money &gt; 0) {
+        if (event == noone &amp;&amp; state_time &gt; room_speed) {
+            event = instance_create(x, y, o_event)
+        }  
+        
+        if (state_time % (2 * room_speed) == 0) {
+            money--;
+        } 
+        
+        if (next_state != 'shop') {
+            state_time = 0;
+            with (event) { instance_destroy(); }
+            event = noone;
+        }
+    }
+}
+if (state == "browse") {
+   if (event == noone &amp;&amp; state_time &gt; room_speed) {
         event = instance_create(x, y, o_event)
-    }   
-    
-    if (next_state != 'shop') {
+    }  
+    if (next_state != 'browse') {
         state_time = 0;
         with (event) { instance_destroy(); }
         event = noone;
@@ -372,6 +392,31 @@ if (state == 'heal') {
         next_state = 'idle'
     }
     if (next_state != 'heal') state_time = 0;
+}
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// DEAD
+if (state == 'dead') {
+    effect = "NA";
 }
 
 </string>
@@ -546,6 +591,7 @@ if (global.debug) {
 }
 
 image_blend = c_white;
+if (state == "dead") image_blend = c_black; 
 
 /*if (effect == 'sick') {
     draw_set_color(c_green)
